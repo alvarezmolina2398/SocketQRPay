@@ -58,6 +58,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (message.accion == '2') {
             var pn1 = document.getElementById('pn-1');
             pn1.style.display = 'none';
+            var pn3 = document.getElementById('right-side');
+            pn3.style.display = 'none';
             var pn2 = document.getElementById('pn-2');
             pn2.style.display = 'block';
         } else if (message.accion == '3') {
@@ -74,8 +76,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     const qrCode = new QRCodeStyling({
-        width: 300,
-        height: 300,
+        width: 280,
+        height: 280,
         type: "png",
         data: `${comercio}/${sesion}/${monto}`,
         image: "/logo-divi.png",
