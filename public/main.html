@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e5eff1;
+      display: flex;
+      height: 100vh;
+    }
+
+    .login-container {
+      display: flex;
+      width: 100%;
+    }
+
+    .left-side {
+      flex: 60%;
+      background: url('tu-imagen.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .right-side {
+      flex: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #27275B;
+    }
+
+    .form-container {
+      width: 80%;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    input,
+    button {
+      margin-bottom: 10px;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #27275B;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #pn-2 {
+      display: none;
+    }
+
+    #pn-3 {
+      display: none;
+      margin-top: 250px;
+    }
+
+    #pn-canvas {
+      border: #27275B 8px solid;
+      border-radius: 20px;
+      padding: 15px;
+      background-color: #fff;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="left-side" id="pn-1">
+      <div>
+        <center>
+          <h1 style="color: black;">Escanea tu codigo QR</h1>
+        </center>
+        <div id="pn-canvas">
+          <div id="canvas"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="left-side" id="pn-2">
+      <div>
+        <center>
+          <h1 style="color: black;">Escanea tu codigo QR</h1>
+        </center>
+        <center><img src="cargando.gif" height="600"></center>
+      </div>
+
+    </div>
+    <div class="left-side" id="pn-3">
+      <center>
+        <h1 style="color: black;">Codigo Validado con Exito</h1>
+      </center>
+      <center><img src="correcto.png" height="400"></center>
+    </div>
+    <div class="right-side">
+      <div class="form-container">
+        <input type="tel" placeholder="Teléfono">
+        <input type="password" placeholder="PIN">
+        <button>Entrar</button>
+      </div>
+    </div>
+  </div>
+  </script>
+</body>
+
+</html>
