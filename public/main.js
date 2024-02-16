@@ -1,37 +1,34 @@
-var socket = io.connect("http://localhost:8080", { forceNew: true });
+//var socket = io.connect("https://rpgbq1fd-8080.use2.devtunnels.ms", { forceNew: true });
+var socket = io.connect('http://localhost:8080', { forceNew: true });
+
+// function render(data) {
+//     var pn2 = document.getElementById('pn-1');
+//     pn2.style.display = 'none';
+
+//     var pn2 = document.getElementById('pn-2');
+//     pn2.style.display = 'none';
 
 
+//     var pn3 = document.getElementById('pn-3');
+//     pn3.style.display = 'block';
+// }
 
+// function addMessage(e) {
+//     var message = {
+//         author: document.getElementById("author").value,  // Utiliza el nombre de usuario almacenado
+//         text: document.getElementById("texto").value,
+//     };
 
-function render(data) {
+//     socket.emit("new-message", message);
+//     return false;
+// }
 
-
-    var pn2 = document.getElementById('pn-1');
-    pn2.style.display = 'none';
-
-    var pn2 = document.getElementById('pn-2');
-    pn2.style.display = 'none';
-
-
-    var pn3 = document.getElementById('pn-3');
-    pn3.style.display = 'block';
-}
-
-function addMessage(e) {
-    var message = {
-        author: document.getElementById("author").value,  // Utiliza el nombre de usuario almacenado
-        text: document.getElementById("texto").value,
-    };
-
-    socket.emit("new-message", message);
-    return false;
-}
-
-function generarCadenaAleatoria() {
-    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const generarCadenaAleatoria = (cantidad) => {
+    //const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let cadenaAleatoria = '';
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < cantidad; i++) {
         const indice = Math.floor(Math.random() * caracteres.length);
         cadenaAleatoria += caracteres.charAt(indice);
     }
@@ -40,47 +37,127 @@ function generarCadenaAleatoria() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function (event) {
+
+
+const montoTxt = $('#monto');
+const sesionTxt = $('#sesion');
+
+
+
+$(function () {
+
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
-    //Accedemos a los valores
     var comercio = urlParams.get('comercio');
     var monto = urlParams.get('monto');
-   
-    const sesion = generarCadenaAleatoria();
+    montoTxt.text('Q' + parseFloat(monto).toFixed(2));
+    const sesion = generarCadenaAleatoria(6);
+    sesionTxt.val(sesion);
+    crearQr(comercio, sesion, monto);
+    $('#pn-cargando').hide();
+    $('#pn-error').hide();
+    $('#pn-exito').hide();
+    $('#pn-descripcion').hide();
+    $('#pn-qr').hide();
+    $('#textInicio').hide();
+    $('#textLoading').hide();
+    $('#textTime').hide();
+    $('#textError').hide();
+    var fechaObjetivo = new Date();
+   // fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 1);
+   fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
+    var intervalo = setInterval(() => {
+        var ahora = new Date();
+        var diferenciaTiempo = fechaObjetivo - ahora;
 
-    // Obtener el nombre de usuario al iniciar sesión
-    socket.emit("join-room", sesion);
+        // Calcula minutos y segundos restantes
+        var minutosRestantes = Math.floor((diferenciaTiempo / 1000 / 60) % 60);
+        var segundosRestantes = Math.floor((diferenciaTiempo / 1000) % 60);
 
-    socket.on("messages", function (data) {
+        if (diferenciaTiempo <= 0) {
+            $('#pn-qr').hide();
+            $('#pn-cargando').hide();
+            $('#pn-error').hide();
+            $('#pn-exito').hide();
+            $('#pn-descripcion').hide();
+            $('#textInicio').hide();
+            clearInterval(intervalo);
+            $('#pn-error').show();
+            $('#pn-error').addClass("animate__headShake");
+            $('#textTime').show();
+            
 
-        var message = data[data.length - 1];
-        if (message.accion == '2') {
-            var pn1 = document.getElementById('pn-1');
-            pn1.style.display = 'none';
-            var pn3 = document.getElementById('right-side');
-            pn3.style.display = 'none';
-            var pn2 = document.getElementById('pn-2');
-            pn2.style.display = 'block';
-        } else if (message.accion == '3') {
-            render(message);
+        } else {
+            // Muestra la cuenta regresiva
+            $('#time').text(minutosRestantes + " minutos " + segundosRestantes + " segundos ");
         }
 
-        // var message = data[data.length - 1];
-        // setTimeout(() => {
-        //     render(message);// Cambiar a 'inline', 'flex', 'grid' u otra propiedad según lo que necesites
-        // }, 3000);
+
+
+        // Si la cuenta regresiva ha alcanzado cero, realiza alguna acción adicional si es necesario
+
+    }, 1000);
+
+
+
+
+
+
+
+
+    socket.emit("join-room", sesion);
+    socket.emit("new-message", { sesion, comercio, monto, accion: 1 },);
+
+
+    socket.on("messages", function (data) {
+        $('#pn-qr').hide();
+        $('#pn-cargando').hide();
+        $('#pn-error').hide();
+        $('#pn-exito').hide();
+        $('#pn-descripcion').hide();
+
+
+
+
+        $('#textInicio').hide();
+        $('#textLoading').hide();
+        $('#textTime').hide();
+        $('#textError').hide();
+        var message = data[data.length - 1];
+
+
+        if (message.accion == '2') {
+            $('#textLoading').show();
+            $('#pn-cargando').show();
+            $('#pn-cargando').addClass("animate__fadeIn");
+        }
+        else if (message.accion == '3') {
+            $('#pn-exito').show();
+            $('#pn-exito').addClass("animate__fadeIn");
+        }
+        else if (message.accion == '4') {
+            $('#pn-error').show();
+            $('#pn-error').addClass("animate__headShake");
+            $('#textError').show();
+        }
+        else if (message.accion == '0' || message.accion == '1') {
+            $('#pn-qr').show();
+            $('#pn-descripcion').show();
+            $('#textInicio').show();
+        }
 
     });
+});
 
 
 
+const crearQr = (comercio, sesion, monto) => {
     const qrCode = new QRCodeStyling({
-        width: 280,
-        height: 280,
+        width: 250,
+        height: 250,
         type: "png",
         data: `${comercio}/${sesion}/${monto}`,
-        image: "/logo-divi.png",
+        image: "img/logo-divi.png",
         dotsOptions: {
             type: "rounded",
             color: "#27275b",
@@ -148,9 +225,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         },
         imageOptions: {
             crossOrigin: "anonymous",
-            margin: 20
+            margin: 3
         }
     });
 
     qrCode.append(document.getElementById("canvas"));
-});
+}
+
+

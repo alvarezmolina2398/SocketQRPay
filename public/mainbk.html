@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      /*background-color: #e5eff1;*/
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #imagenPosicionada {
+      position: absolute; /* Establece la posición absoluta */
+      top: -250px; /* Coloca la imagen en la parte superior */
+      right: -300px/* Coloca la imagen en la parte izquierda */
+    }
+
+    .login-container {
+      display: flex;
+      width: 100%;
+    }
+
+    .left-side {
+      flex: 50%;
+      background: url('tu-imagen.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+    }
+
+    .right-side {
+      flex: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /*background-color: #27275B;*/
+      background-color: #FF8100;
+    }
+
+    .form-container {
+      width: 80%;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    input,
+    button {
+      margin-bottom: 10px;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #27275B;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #pn-2 {
+      display: none;
+      margin-top: 80px;
+    }
+
+    #pn-3 {
+      display: none;
+      margin-top: 150px;
+    }
+
+    #pn-4 {
+      display: none;
+      margin-top: 150px;
+    }
+
+    .pn-canvas {
+      width: 300px;
+      height: 300px;
+      border: #27275B 8px solid;
+      border-radius: 20px;
+      padding: 15px;
+      background-color: #fff;
+    }
+
+    #pn-1 {
+      margin-top: 50px;
+    }
+
+    #exit-button {
+      background-color: #FF8100;
+      height: 45px;
+      width: 110px;
+      margin-top: 50px;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      border-radius: 20px;
+      box-shadow: none;
+      outline: none;
+      border: 0;
+    }
+
+    .boton-semi-redondo {
+      width: 250px;
+      padding: 10px 20px;
+      border-radius: 20px 20px 20px 20px;
+      /* Ajusta según sea necesario */
+      background-color: #FFFFFF;
+      color: #27275B;
+      text-align: center;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      border-color: #27275B;
+    }
+
+    /* Cambio de color al pasar el mouse */
+  </style>
+
+</head>
+
+<body>
+  <img src="91.png" alt="Descripción de la imagen" id="imagenPosicionada">
+  <div class="login-container">
+    <div class="left-side" id="pn-1">
+      <center>
+        <div>
+          <div>
+            <center>
+              <img src="logo-dividelo.png" height="185" alt="">
+            </center>
+          </div>
+          <div>
+            <center>
+              <h2 style="color: #27275B; font-weight: normal;">Escanea el código QR</h2>
+            </center>
+          </div>
+          <div class="pn-canvas">
+            <div id="canvas"></div>
+          </div>
+          <!-- <div style="padding: 10px;">
+            <h1 style="color: #27275B; font-weight: normal;">Monto</h2>
+          </div> -->
+          <div class="pn-div-Trx">
+            <h1 style="color: #27275B; font-weight: bold;" id="monto"></h1>
+            <!-- <p style="color: #27275B; font-weight: normal;">o</p> -->
+            <p style="color: #27275B; font-weight: normal;">Puedes utilizar también el código de transacción</p>
+            <input class="boton-semi-redondo" id="trxSesion">
+          </div>
+        </div>
+      </center>
+    </div>
+    <div class="left-side" id="pn-2">
+      <center>
+        <div>
+          <div>
+            <center>
+              <img src="logo-dividelo.png" height="185" alt="">
+            </center>
+          </div>
+          <div>
+            <center>
+              <h2 style="color: #27275B; font-weight: normal;">Escanea el código QR</h2>
+            </center>
+          </div>
+          <div class="pn-canvas">
+            <center>
+              <img src="loading.svg" alt="Descripción del SVG">
+            </center>
+          </div>
+        </div>
+      </center>
+    </div>
+    <div class="left-side" id="pn-3">
+      <div>
+        <center>
+          <img src="logo-dividelo.png" height="185" alt="">
+        </center>
+      </div>
+      <center>
+        <h2 style="color: #27275B; font-weight: bold;">COMPRA EXITOSA</h2>
+        <h2 style="color: #27275B; font-weight: bold;">Gracias por comprar con DiviCuotas</h2>
+      </center>
+      <center><img src="correcto2.png" height="250"></center>
+
+      <div>
+        <button id="exit-button">Salir</button>
+      </div>
+
+    </div>
+    <div class="left-side" id="pn-4">
+      <div>
+        <center>
+          <img src="logo-dividelo.png" height="185" alt="">
+        </center>
+      </div>
+      <center>
+        <h2 style="color: #d62c2c; font-weight: bold;">COMPRA CON ERROR</h2>
+        <h2 style="color: #27275B; font-weight: bold;">Se ha producido un error al momento de generar la compra </h2>
+      </center>
+      <center><img src="error.png" height="250"></center>
+      <div>
+        <button id="exit-button">Salir</button>
+      </div>
+    </div>
+    <div class="right-side">
+      <div style="margin-top: 80px;
+      ">
+        <center>
+          <img src="people.png" height="700" alt="">
+        </center>
+      </div>
+    </div>
+  </div>
+  </script>
+</body>
+
+</html>

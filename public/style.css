@@ -1,0 +1,165 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+#pn-exito {
+    width: 300px;
+    height: 300px;
+}
+#pn-right {
+    background-color: #FF8100;
+}
+
+.pd-img {
+    padding: 8%;
+}
+
+.pd-md {
+    padding: 10%;
+}
+
+.text-center-h {
+    color: #27275B;
+    font-weight: normal;
+    text-align: center;
+}
+
+.pn-canvas {
+    width: 300px;
+    height: 300px;
+    border: #27275B 8px solid;
+    border-radius: 20px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.semi-redondo{
+    width: 250px;
+    padding: 10px 20px;
+    border-radius: 20px 20px 20px 20px;
+    /* Ajusta según sea necesario */
+    background-color: #FFFFFF;
+    color: #27275B;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    border-color: #27275B;
+  }
+
+/*reglas de margin */
+.mt-1 {
+    margin-top: 4px !important;
+}
+
+.mt-2 {
+    margin-top: 8px !important;
+}
+
+.mt-3 {
+    margin-top: 12px !important;
+}
+
+.mt-4 {
+    margin-top: 16px !important;
+}
+
+.mt-5 {
+    margin-top: 20px !important;
+}
+
+.mt-6 {
+    margin-top: 24px !important;
+}
+
+.mt-7 {
+    margin-top: 28px !important;
+}
+
+.mt-8 {
+    margin-top: 32px !important;
+}
+
+.mt-9 {
+    margin-top: 36px !important;
+}
+
+.mt-10 {
+    margin-top: 40px !important;
+}
+
+
+.esquina-superior-derecha {
+    /* Estilos para la forma (pueden variar según tu caso) */
+
+    /* Posicionamiento en la esquina superior derecha */
+    position: fixed;
+    top: -150px;
+    right:-150px;
+
+    /* Agregar cualquier otro estilo deseado */
+}
+
+
+
+.esquina-superior-derecha-2 {
+    /* Estilos para la forma (pueden variar según tu caso) */
+
+    /* Posicionamiento en la esquina superior derecha */
+    position: fixed;
+    top:  -100px;
+    right: -80px;
+
+    /* Agregar cualquier otro estilo deseado */
+}
+
+.esquina-inferior-derecha{
+    position: fixed;
+    bottom: -140px;
+    left:-130px;
+    max-width: 300px;
+}
+
+@media screen and (min-width: 768px) {
+    .esquina-superior-derecha {
+        /* Agregar estilos específicos para dispositivos grandes */
+        display: block; 
+        max-height: 400px;
+        /* Ancho ajustado para dispositivos más grandes */
+        /* Otros estilos específicos para dispositivos más grandes */
+    }
+    .esquina-superior-derecha-2 {
+        /* Agregar estilos específicos para dispositivos grandes */
+        display: none; 
+        /* Ancho ajustado para dispositivos más grandes */
+        /* Otros estilos específicos para dispositivos más grandes */
+    }
+    .esquina-inferior-derecha {
+        /* Agregar estilos específicos para dispositivos grandes */
+        display: none; 
+        /* Ancho ajustado para dispositivos más grandes */
+        /* Otros estilos específicos para dispositivos más grandes */
+    }
+}
+
+/* Media query para aplicar estilos solo en dispositivos con ancho mayor a 768px */
+@media screen and (max-width: 1200px) {
+    .esquina-superior-derecha {
+        display: none; /* Oculta la imagen en pantallas más pequeñas */
+    }
+    .esquina-superior-derecha-2 {
+        /* Agregar estilos específicos para dispositivos grandes */
+        display: block; 
+        max-height: 220px;
+        /* Ancho ajustado para dispositivos más grandes */
+        /* Otros estilos específicos para dispositivos más grandes */
+    }
+}

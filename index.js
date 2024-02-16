@@ -26,10 +26,17 @@ io.on("connection", function (socket) {
   socket.on("new-message", function (data) {
     //console.log(data);
     messages.push(data);
-    //console.log(messages);
+    const messagesReturn = messages.filter(m => m.sesion == data.sesion);
+    const validos =  messagesReturn.filter(m => m.accion == 1);
+
+    console.log(validos.length);
+   // console.log(messages);
+   // console.log(messagesReturn);
     // Enviar mensajes solo a la sala del usuario que los envió
-    io.to(data.sesion).emit("messages", messages);
+    io.to(data.sesion).emit("messages", validos.length != 0 ?  messagesReturn : []);
   });
+
+
 });
 
 
