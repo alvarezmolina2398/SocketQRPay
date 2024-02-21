@@ -64,8 +64,8 @@ $(function () {
     $('#textTime').hide();
     $('#textError').hide();
     var fechaObjetivo = new Date();
-    //fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
-    fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
+    fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
+    //fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
     var intervalo = setInterval(() => {
         var ahora = new Date();
         var diferenciaTiempo = fechaObjetivo - ahora;
@@ -94,20 +94,25 @@ $(function () {
 
 
     socket.on("messages", function (data) {
-        $('#pn-qr').hide();
-        $('#pn-cargando').hide();
-        $('#pn-error').hide();
-        $('#pn-exito').hide();
-        $('#pn-descripcion').hide();
 
-
-
-
-        $('#textInicio').hide();
-        $('#textLoading').hide();
-        $('#textTime').hide();
-        $('#textError').hide();
         var message = data[data.length - 1];
+        if (message.accion != '6') {
+            $('#pn-qr').hide();
+            $('#pn-cargando').hide();
+            $('#pn-error').hide();
+            $('#pn-exito').hide();
+            $('#pn-descripcion').hide();
+
+
+
+
+            $('#textInicio').hide();
+            $('#textLoading').hide();
+            $('#textTime').hide();
+            $('#textError').hide();
+        }
+
+
 
 
         if (message.accion == '2') {
