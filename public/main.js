@@ -1,6 +1,6 @@
 //var socket = io.connect("https://rpgbq1fd-8080.use2.devtunnels.ms", { forceNew: true });
-var socket = io.connect('http://161.35.226.54:8080', { forceNew: true });
-
+//var socket = io.connect('http://161.35.226.54:8080', { forceNew: true });
+var socket = io.connect('http://localhost:8080', { forceNew: true });
 // function render(data) {
 //     var pn2 = document.getElementById('pn-1');
 //     pn2.style.display = 'none';
@@ -64,8 +64,8 @@ $(function () {
     $('#textTime').hide();
     $('#textError').hide();
     var fechaObjetivo = new Date();
-   fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
-   //fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
+    //fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
+    fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
     var intervalo = setInterval(() => {
         var ahora = new Date();
         var diferenciaTiempo = fechaObjetivo - ahora;
@@ -75,31 +75,15 @@ $(function () {
         var segundosRestantes = Math.floor((diferenciaTiempo / 1000) % 60);
 
         if (diferenciaTiempo <= 0) {
-            $('#pn-qr').hide();
-            $('#pn-cargando').hide();
-            $('#pn-error').hide();
-            $('#pn-exito').hide();
-            $('#pn-descripcion').hide();
-            $('#textInicio').hide();
-            clearInterval(intervalo);
-            $('#pn-error').show();
-            $('#pn-error').addClass("animate__headShake");
-            $('#textTime').show();
-            
-
+            socket.emit("new-message", { sesion, comercio, monto, accion: 5 },);
         } else {
             // Muestra la cuenta regresiva
             $('#time').text(minutosRestantes + " minutos " + segundosRestantes + " segundos ");
         }
 
-
-
         // Si la cuenta regresiva ha alcanzado cero, realiza alguna acción adicional si es necesario
 
     }, 1000);
-
-
-
 
 
 
@@ -132,6 +116,7 @@ $(function () {
             $('#pn-cargando').addClass("animate__fadeIn");
         }
         else if (message.accion == '3') {
+            clearInterval(intervalo);
             $('#pn-exito').show();
             $('#pn-exito').addClass("animate__fadeIn");
         }
@@ -139,6 +124,13 @@ $(function () {
             $('#pn-error').show();
             $('#pn-error').addClass("animate__headShake");
             $('#textError').show();
+        }
+        else if (message.accion == '5') {
+            clearInterval(intervalo);
+            $('#textInicio').hide();
+            $('#pn-error').show();
+            $('#pn-error').addClass("animate__headShake");
+            $('#textTime').show();
         }
         else if (message.accion == '0' || message.accion == '1') {
             $('#pn-qr').show();
