@@ -1,5 +1,5 @@
 //var socket = io.connect("https://rpgbq1fd-8080.use2.devtunnels.ms", { forceNew: true });
-var socket = io.connect('http://161.35.226.54:8080', { forceNew: true });
+var socket = io.connect('https://devgefectivov2.site/botonPago/', { forceNew: true });
 //var socket = io.connect('http://localhost:8080', { forceNew: true });
 // function render(data) {
 //     var pn2 = document.getElementById('pn-1');
