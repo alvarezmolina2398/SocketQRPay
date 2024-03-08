@@ -50,6 +50,7 @@ $(function () {
     const urlParams = new URLSearchParams(valores);
     var comercio = urlParams.get('comercio');
     var monto = urlParams.get('monto');
+    var usuario = urlParams.get('usuario');
     montoTxt.text('Q' + parseFloat(monto).toFixed(2));
     const sesion = generarCadenaAleatoria(6);
     sesionTxt.val(sesion);
@@ -90,7 +91,7 @@ $(function () {
 
 
     socket.emit("join-room", sesion);
-    socket.emit("new-message", { sesion, comercio, monto, accion: 1 },);
+    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario },);
 
 
     socket.on("messages", function (data) {
