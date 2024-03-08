@@ -34,7 +34,7 @@ io.on("connection", (socket) => {
         "comercio": data.comercio ?? "",
         "monto": data.monto  ?? 0,
         "usuario_id": data.usuario ?? 'SIN USUARIO',
-        "accion": data.accion ?? 0
+        "accion": data.accion + "" ?? "0"
       });
 
       const requestOptions = {
