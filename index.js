@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-var fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 var messages = [];
 
 app.use(express.static("public"));
@@ -31,8 +31,8 @@ io.on("connection", function (socket) {
 
       const raw = JSON.stringify({
         "sesion": data.sesion ?? "",
-        "comercio":data.comercio ?? "",
-        "monto": data.monto  ?? 0,
+        "comercio": data.comercio ?? "",
+        "monto": data.monto ?? 0,
         "usuario_id": data.usuario ?? 'SIN USUARIO',
         "accion": data.accion ?? 0
       });
@@ -44,12 +44,13 @@ io.on("connection", function (socket) {
         redirect: "follow"
       };
 
-      fetch("https://appsip.genesisempresarial.com/GEfectivoAdmin/api/LogBotonPago/InsertLogBotonPago", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+      import('node-fetch').then((fetch) => {
+        fetch("https://appsip.genesisempresarial.com/GEfectivoAdmin/api/LogBotonPago/InsertLogBotonPago", requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.error(error));
 
-
+      });
     } catch (e) {
       console.log(e);
     }
