@@ -50,7 +50,7 @@ io.on("connection", function (socket) {
           .then((result) => console.log(result))
           .catch((error) => console.error(error));
 
-      });
+      }).catch(error => console.error('Error al importar node-fetch:', error));;
     } catch (e) {
       console.log(e);
     }
