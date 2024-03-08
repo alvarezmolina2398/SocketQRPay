@@ -33,7 +33,7 @@ io.on("connection", function (socket) {
         "sesion": data.sesion ?? "",
         "comercio":data.comercio ?? "",
         "monto": data.monto  ?? 0,
-        "usuario": data.usuario ?? 'SIN USUARIO',
+        "usuario_id": data.usuario ?? 'SIN USUARIO',
         "accion": data.accion ?? 0
       });
 
