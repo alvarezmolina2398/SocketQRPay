@@ -4,6 +4,7 @@ body {
     margin: 0;
     overflow-y: hidden;
     overflow-x: hidden;
+    background-color: #f7f7f7;
 }
 
 .full-height {
@@ -35,7 +36,7 @@ body {
 .pn-canvas {
     width: 300px;
     height: 300px;
-    border: #27275B 8px solid;
+    border: #fe8100 8px solid;
     border-radius: 20px;
     padding: 15px;
     background-color: #fff;

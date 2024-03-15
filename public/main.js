@@ -43,6 +43,15 @@ const montoTxt = $('#monto');
 const sesionTxt = $('#sesion');
 
 
+$('#pn-cargando').hide();
+$('#pn-error').hide();
+$('#pn-exito').hide();
+$('#pn-descripcion').hide();
+$('#pn-qr').hide();
+$('#textInicio').hide();
+$('#textLoading').hide();
+$('#textTime').hide();
+$('#textError').hide();
 
 $(function () {
 
