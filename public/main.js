@@ -112,10 +112,6 @@ $(function () {
             $('#pn-error').hide();
             $('#pn-exito').hide();
             $('#pn-descripcion').hide();
-
-
-
-
             $('#textInicio').hide();
             $('#textLoading').hide();
             $('#textTime').hide();
