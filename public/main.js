@@ -58,15 +58,6 @@ $(function () {
     $('#textError').hide();
 
 
-
-
-
-
-
-
-
-
-
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
     var comercio = urlParams.get('comercio');
@@ -98,16 +89,12 @@ $(function () {
 
     }, 1000);
 
-
-
-
-
     socket.emit("join-room", sesion);
     socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario },);
 
 
     socket.on("messages", function (data) {
-
+        console.log(data);
         var message = data[data.length - 1];
         if (message.accion != '6') {
             $('#pn-qr').hide();
@@ -140,11 +127,11 @@ $(function () {
             $('#textError').show();
         }
         else if (message.accion == '5') {
-            clearInterval(intervalo);
+           
             $('#textInicio').hide();
             $('#pn-error').show();
             $('#pn-error').addClass("animate__headShake");
-            $('#textTime').show();
+            clearInterval(intervalo);
         }
         else if (message.accion == '0' || message.accion == '1') {
             $('#pn-qr').show();
