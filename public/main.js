@@ -85,15 +85,6 @@ $(function () {
     const sesion = generarCadenaAleatoria(6);
     sesionTxt.val(sesion);
     crearQr(comercio, sesion, monto);
-    $('#pn-cargando').hide();
-    $('#pn-error').hide();
-    $('#pn-exito').hide();
-    $('#pn-descripcion').hide();
-    $('#pn-qr').hide();
-    $('#textInicio').hide();
-    $('#textLoading').hide();
-    $('#textTime').hide();
-    $('#textError').hide();
     var fechaObjetivo = new Date();
     // fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
     fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
