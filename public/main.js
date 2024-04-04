@@ -111,29 +111,29 @@ $(function () {
 
 
 
-        if (message.accion == '2') {
+        if (message.accion === 2) {
             $('#textLoading').show();
             $('#pn-cargando').show();
             $('#pn-cargando').addClass("animate__fadeIn");
         }
-        else if (message.accion == '3') {
+        else if (message.accion === 3) {
             clearInterval(intervalo);
             $('#pn-exito').show();
             $('#pn-exito').addClass("animate__fadeIn");
         }
-        else if (message.accion == '4') {
+        else if ((message.accion) === 4) {
             $('#pn-error').show();
             $('#pn-error').addClass("animate__headShake");
             $('#textError').show();
         }
-        else if (message.accion == '5') {
+        else if (message.accion === 5) {
            
             $('#textInicio').hide();
             $('#pn-error').show();
             $('#pn-error').addClass("animate__headShake");
             clearInterval(intervalo);
         }
-        else if (message.accion == '0' || message.accion == '1') {
+        else if (message.accion === 0 || message.accion === 1) {
             $('#pn-qr').show();
             $('#pn-descripcion').show();
             $('#textInicio').show();
