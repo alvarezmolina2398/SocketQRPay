@@ -129,6 +129,7 @@ $(function () {
         else if (message.accion === 5) {
            
             $('#textInicio').hide();
+            $('#textError').show();
             $('#pn-error').show();
             $('#pn-error').addClass("animate__headShake");
             clearInterval(intervalo);
