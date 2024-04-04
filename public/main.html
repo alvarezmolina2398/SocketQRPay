@@ -22,25 +22,25 @@
           <img src="img/logo-dividelo.png" class="img-fluid" alt="Imagen Responsive">
         </div> -->
         <h2 id="textInicio" class="text-center-h mt-10">Escanea el código QR</h2>
-        <h2  id="textLoading" class="text-center-h mt-10 d-none">Esperando Confirmación del cliente</h2>
-        <h2  id="textError" class="text-center-h mt-10 d-none">Error al escanear el codigo.</h2>
-        <h2  id="textTime" class="text-center-h mt-10 d-none">Tiempo agotado.</h2>
+        <h2  id="textLoading" class="text-center-h mt-10 ">Esperando Confirmación del cliente</h2>
+        <h2  id="textError" class="text-center-h mt-10">Error al escanear el codigo.</h2>
+        <h2  id="textTime" class="text-center-h mt-10 ">Tiempo agotado.</h2>
         <div id="pn-1" class="d-flex flex-column align-items-center justify-content-center">
           <div class="pn-canvas animate__animated animate__bounce" id="pn-qr">
             <div id="canvas">
 
             </div>
           </div>
-          <div class="pn-canvas animate__animated d-none" id="pn-cargando"> 
+          <div class="pn-canvas animate__animated" id="pn-cargando"> 
             <img src="img/loading.svg" alt="cargando Informacion">
           </div>
-          <div class="animate__animated d-none" id="pn-exito">
+          <div class="animate__animated" id="pn-exito">
             <img src="img/correcto2.png" class="img-fluid" alt="Imagen Responsive">
           </div>
-          <div class="pn-canvas animate__animated d-none" id="pn-error" onclick="window.location.reload()" > 
+          <div class="pn-canvas animate__animated" id="pn-error" onclick="window.location.reload()" > 
             <img src="img/reload.svg" class="img-fluid" alt="Imagen Responsive">
           </div>
-          <div id="pn-descripcion d-none">
+          <div id="pn-descripcion">
             <div class="d-flex flex-column align-items-center justify-content-center">
               <h4 class="text-center-h font-weight-bold mt-5" id="monto"></h4>
               <!-- <p style="color: #27275B; font-weight: normal;">o</p> -->
