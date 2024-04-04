@@ -1,27 +1,7 @@
 //var socket = io.connect("https://rpgbq1fd-8080.use2.devtunnels.ms", { forceNew: true });
 var socket = io.connect('https://devgefectivov2.site', { forceNew: true });
 //var socket = io.connect('http://localhost:8080', { forceNew: true });
-// function render(data) {
-//     var pn2 = document.getElementById('pn-1');
-//     pn2.style.display = 'none';
 
-//     var pn2 = document.getElementById('pn-2');
-//     pn2.style.display = 'none';
-
-
-//     var pn3 = document.getElementById('pn-3');
-//     pn3.style.display = 'block';
-// }
-
-// function addMessage(e) {
-//     var message = {
-//         author: document.getElementById("author").value,  // Utiliza el nombre de usuario almacenado
-//         text: document.getElementById("texto").value,
-//     };
-
-//     socket.emit("new-message", message);
-//     return false;
-// }
 
 const generarCadenaAleatoria = (cantidad) => {
     //const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -37,17 +17,11 @@ const generarCadenaAleatoria = (cantidad) => {
 }
 
 
-
-
 const montoTxt = $('#monto');
 const sesionTxt = $('#sesion');
 
 
-
-
 $(function () {
-
-    // $('#pn-cargando').hide();
     $('#pn-error').hide();
     $('#pn-exito').hide();
     $('#pn-descripcion').hide();
@@ -68,8 +42,8 @@ $(function () {
     sesionTxt.val(sesion);
     crearQr(comercio, sesion, monto);
     var fechaObjetivo = new Date();
-    // fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
-    fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
+    fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
+   // fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
     var intervalo = setInterval(() => {
         var ahora = new Date();
         var diferenciaTiempo = fechaObjetivo - ahora;
