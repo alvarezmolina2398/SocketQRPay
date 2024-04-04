@@ -47,7 +47,7 @@ const sesionTxt = $('#sesion');
 
 $(function () {
 
-    $('#pn-cargando').hide();
+    // $('#pn-cargando').hide();
     $('#pn-error').hide();
     $('#pn-exito').hide();
     $('#pn-descripcion').hide();
