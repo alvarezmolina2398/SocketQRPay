@@ -43,17 +43,38 @@ const montoTxt = $('#monto');
 const sesionTxt = $('#sesion');
 
 
-$('#pn-cargando').hide();
-$('#pn-error').hide();
-$('#pn-exito').hide();
-$('#pn-descripcion').hide();
-$('#pn-qr').hide();
-$('#textInicio').hide();
-$('#textLoading').hide();
-$('#textTime').hide();
-$('#textError').hide();
+
 
 $(function () {
+
+    $('#pn-cargando').hide();
+    $('#pn-error').hide();
+    $('#pn-exito').hide();
+    $('#pn-descripcion').hide();
+    $('#pn-qr').hide();
+    $('#textInicio').hide();
+    $('#textLoading').hide();
+    $('#textTime').hide();
+    $('#textError').hide();
+
+
+
+
+    $('#pn-cargando').css('display', "block");
+    $('#pn-error').css('display', "block");
+    $('#pn-exito').css('display', "block");
+    $('#pn-descripcion').css('display', "block");
+    $('#pn-qr').css('display', "block");
+    $('#textInicio').css('display', "block");
+    $('#textLoading').css('display', "block");
+    $('#textTime').css('display', "block");
+    $('#textError').css('display', "block");
+
+
+
+
+
+
 
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
@@ -74,7 +95,7 @@ $(function () {
     $('#textTime').hide();
     $('#textError').hide();
     var fechaObjetivo = new Date();
-   // fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
+    // fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
     fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
     var intervalo = setInterval(() => {
         var ahora = new Date();
