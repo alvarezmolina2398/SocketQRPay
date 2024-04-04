@@ -60,15 +60,6 @@ $(function () {
 
 
 
-    $('#pn-cargando').css('display', "block");
-    $('#pn-error').css('display', "block");
-    $('#pn-exito').css('display', "block");
-    $('#pn-descripcion').css('display', "block");
-    $('#pn-qr').css('display', "block");
-    $('#textInicio').css('display', "block");
-    $('#textLoading').css('display', "block");
-    $('#textTime').css('display', "block");
-    $('#textError').css('display', "block");
 
 
 
