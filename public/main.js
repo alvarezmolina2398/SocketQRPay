@@ -74,8 +74,8 @@ $(function () {
     $('#textTime').hide();
     $('#textError').hide();
     var fechaObjetivo = new Date();
-    fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
-    //fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
+   // fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
+    fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
     var intervalo = setInterval(() => {
         var ahora = new Date();
         var diferenciaTiempo = fechaObjetivo - ahora;
