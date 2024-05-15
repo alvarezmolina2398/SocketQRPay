@@ -42,7 +42,7 @@ $(function () {
     sesionTxt.val(sesion);
     crearQr(comercio, sesion, monto);
     var fechaObjetivo = new Date();
-    fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 5);
+    fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 10);
    // fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
     var intervalo = setInterval(() => {
         var ahora = new Date();
@@ -81,9 +81,6 @@ $(function () {
             $('#textTime').hide();
             $('#textError').hide();
         }
-
-
-
 
         if (message.accion === 2) {
             $('#textLoading').show();
