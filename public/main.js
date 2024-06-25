@@ -122,7 +122,7 @@ const crearQr = (comercio, sesion, monto) => {
         height: 250,
         type: "png",
         data: `${comercio}/${sesion}/${monto}`,
-        image: "img/logo-divi.png",
+        image: "img/akisi-logo.png",
         dotsOptions: {
             type: "rounded",
             color: "#82298F",
