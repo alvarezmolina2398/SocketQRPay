@@ -125,7 +125,7 @@ const crearQr = (comercio, sesion, monto) => {
         image: "img/logo-divi.png",
         dotsOptions: {
             type: "rounded",
-            color: "#27275b",
+            color: "#82298F",
             gradient: null
         },
         dotsOptionsHelper: {
@@ -143,7 +143,7 @@ const crearQr = (comercio, sesion, monto) => {
         },
         cornersSquareOptions: {
             type: "extra-rounded",
-            color: "#27275b"
+            color: "#82298F"
         },
         cornersSquareOptionsHelper: {
             colorType: {
@@ -153,14 +153,14 @@ const crearQr = (comercio, sesion, monto) => {
             gradient: {
                 linear: true,
                 radial: false,
-                color1: "#27275b",
-                color2: "#27275b",
+                color1: "#82298F",
+                color2: "#82298F",
                 rotation: "0"
             }
         },
         cornersDotOptions: {
             type: "dot",
-            color: "#27275b"
+            color: "#82298F"
         },
         cornersDotOptionsHelper: {
             colorType: {
