@@ -36,11 +36,20 @@ body {
 .pn-canvas {
     width: 300px;
     height: 300px;
-    border: #fe8100 8px solid;
+    border: #fe8100 2px solid;
     border-radius: 20px;
     padding: 15px;
     background-color: #fff;
 }
+
+.pn-canvas-2 {
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    padding: 15px;
+    background-color: #fff;
+}
+
 
 .semi-redondo{
     width: 250px;
@@ -170,5 +179,5 @@ body {
 .fixed-botton {
     position: fixed;
     bottom: 45px;
-    right: 5px;
+    right: 1px;
 }
