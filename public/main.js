@@ -109,8 +109,8 @@ $(function () {
         else if (message.accion === 0 || message.accion === 1) {
             $('#pn-qr').show();
             $('#pn-descripcion').show();
-            $('#btnFixed').show();
             $('#textInicio').show();
+            $('#btnFixed').show();
         }
 
     });
