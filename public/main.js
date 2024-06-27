@@ -99,7 +99,7 @@ $(function () {
             $('#textError').show();
         }
         else if (message.accion === 5) {
-           
+            $('#textTime').hide();
             $('#textInicio').hide();
             $('#textError').show();
             $('#pn-error').show();
