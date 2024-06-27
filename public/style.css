@@ -113,6 +113,13 @@ body {
 }
 
 
+.mt-11 {
+    margin-top: 50px !important;
+}
+
+.mt-12 {
+    margin-top: 60px !important;
+}
 .esquina-superior-derecha {
     /* Estilos para la forma (pueden variar según tu caso) */
 
