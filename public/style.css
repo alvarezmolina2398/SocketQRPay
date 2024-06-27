@@ -40,10 +40,13 @@ body {
     border: #fe8100 2px solid;
     border-radius: 20px;
     padding: 15px;
-    padding-bottom: 0px;
     background-color: #fff;
     display: flex;
     justify-content: center;
+}
+
+#canvas {
+    height: 250px;
 }
 
 .pn-canvas-2 {
