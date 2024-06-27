@@ -78,7 +78,7 @@ $(function () {
             $('#pn-descripcion').hide();
             $('#textInicio').hide();
             $('#textLoading').hide();
-            $('#textTime').hide();
+            $('#time').hide();
             $('#textError').hide();
             $('#btnFixed').hide();
         }
@@ -97,10 +97,10 @@ $(function () {
             $('#pn-error').show();
             $('#pn-error').addClass("animate__headShake");
             $('#textError').show();
-            $('#textTime').hide();
+
         }
         else if (message.accion === 5) {
-            $('#textTime').hide();
+            $('#time').hide();
             $('#textInicio').hide();
             $('#textError').show();
             $('#pn-error').show();
