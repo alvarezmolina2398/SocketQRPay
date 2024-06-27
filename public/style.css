@@ -15,6 +15,7 @@ body {
     width: 300px;
     height: 300px;
 }
+
 #pn-right {
     background-color: #FF8100;
 }
@@ -40,6 +41,8 @@ body {
     border-radius: 20px;
     padding: 15px;
     background-color: #fff;
+    display: flex;
+    justify-content: center;
 }
 
 .pn-canvas-2 {
@@ -51,7 +54,7 @@ body {
 }
 
 
-.semi-redondo{
+.semi-redondo {
     width: 250px;
     padding: 10px 20px;
     border-radius: 20px 20px 20px 20px;
@@ -64,7 +67,7 @@ body {
     font-size: 16px;
     transition: background-color 0.3s;
     border-color: #27275B;
-  }
+}
 
 /*reglas de margin */
 .mt-1 {
@@ -114,7 +117,7 @@ body {
     /* Posicionamiento en la esquina superior derecha */
     position: fixed;
     top: -150px;
-    right:-150px;
+    right: -150px;
 
     /* Agregar cualquier otro estilo deseado */
 }
@@ -126,36 +129,38 @@ body {
 
     /* Posicionamiento en la esquina superior derecha */
     position: fixed;
-    top:  -100px;
+    top: -100px;
     right: -80px;
 
     /* Agregar cualquier otro estilo deseado */
 }
 
-.esquina-inferior-derecha{
+.esquina-inferior-derecha {
     position: fixed;
     bottom: -140px;
-    left:-130px;
+    left: -130px;
     max-width: 300px;
 }
 
 @media screen and (min-width: 768px) {
     .esquina-superior-derecha {
         /* Agregar estilos específicos para dispositivos grandes */
-        display: block; 
+        display: block;
         max-height: 400px;
         /* Ancho ajustado para dispositivos más grandes */
         /* Otros estilos específicos para dispositivos más grandes */
     }
+
     .esquina-superior-derecha-2 {
         /* Agregar estilos específicos para dispositivos grandes */
-        display: none; 
+        display: none;
         /* Ancho ajustado para dispositivos más grandes */
         /* Otros estilos específicos para dispositivos más grandes */
     }
+
     .esquina-inferior-derecha {
         /* Agregar estilos específicos para dispositivos grandes */
-        display: none; 
+        display: none;
         /* Ancho ajustado para dispositivos más grandes */
         /* Otros estilos específicos para dispositivos más grandes */
     }
@@ -164,11 +169,13 @@ body {
 /* Media query para aplicar estilos solo en dispositivos con ancho mayor a 768px */
 @media screen and (max-width: 1200px) {
     .esquina-superior-derecha {
-        display: none; /* Oculta la imagen en pantallas más pequeñas */
+        display: none;
+        /* Oculta la imagen en pantallas más pequeñas */
     }
+
     .esquina-superior-derecha-2 {
         /* Agregar estilos específicos para dispositivos grandes */
-        display: block; 
+        display: block;
         max-height: 220px;
         /* Ancho ajustado para dispositivos más grandes */
         /* Otros estilos específicos para dispositivos más grandes */
