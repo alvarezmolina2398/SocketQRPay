@@ -84,6 +84,7 @@ $(function () {
         }
 
         if (message.accion === 2) {
+            $('#time').show();
             $('#textLoading').show();
             $('#pn-cargando').show();
             $('#pn-cargando').addClass("animate__fadeIn");
@@ -108,6 +109,7 @@ $(function () {
             clearInterval(intervalo);
         }
         else if (message.accion === 0 || message.accion === 1) {
+            $('#time').show();
             $('#pn-qr').show();
             $('#pn-descripcion').show();
             $('#textInicio').show();
