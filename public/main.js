@@ -37,8 +37,9 @@ $(function () {
     var comercio = urlParams.get('comercio');
     var monto = urlParams.get('monto');
     var usuario = urlParams.get('usuario');
+    var sesion = urlParams.get('sesion');
     montoTxt.text('Q' + parseFloat(monto).toFixed(2));
-    const sesion = generarCadenaAleatoria(6);
+    //const sesion = generarCadenaAleatoria(6);
     sesionTxt.val(sesion);
     crearQr(comercio, sesion, monto);
     var fechaObjetivo = new Date();
