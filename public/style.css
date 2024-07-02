@@ -29,9 +29,12 @@ body {
 }
 
 .text-center-h {
-    color: #fe8100;
+    /* color: #fe8100; */
     font-weight: normal;
     text-align: center;
+}
+.orange-text {
+    color: #fe8100;
 }
 
 .pn-canvas { 
