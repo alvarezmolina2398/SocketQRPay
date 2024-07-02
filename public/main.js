@@ -27,7 +27,7 @@ $(function () {
     $('#pn-descripcion').hide();
     $('#pn-qr').hide();
     $('#textInicio').hide();
-    $('#textLoading').hide();
+    $('.textLoading').hide();
     $('#textTime').hide();
     $('#textError').hide();
 
@@ -78,7 +78,7 @@ $(function () {
             $('#pn-exito').hide();
             $('#pn-descripcion').hide();
             $('#textInicio').hide();
-            $('#textLoading').hide();
+            $('.textLoading').hide();
             $('#time').hide();
             $('#textError').hide();
             $('#btnFixed').hide();
@@ -86,7 +86,7 @@ $(function () {
 
         if (message.accion === 2) {
             $('#time').show();
-            $('#textLoading').show();
+            $('.textLoading').show();
             $('#pn-cargando').show();
             $('#pn-cargando').addClass("animate__fadeIn");
         }
