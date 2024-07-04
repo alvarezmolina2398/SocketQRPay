@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
 
 
     // Configura los minutos en una variable
-    const minutes = 1;
+    const minutes = 0.1;
 
     // Convierte los minutos a milisegundos
     const milliseconds = minutes * 60 * 1000;
@@ -65,10 +65,20 @@ io.on("connection", (socket) => {
     if (data.accion == 1) {
       console.log('la sesion ' + data.sesion + " se cerrara en " + minutes + " minuto");
       setTimeout(() => {
-       
+
         const sesionenv = data.sesion;
         const qrse = data.sesionQR;
-        io.to(data.sesion).emit('new-message', { sesion: sesionenv, accion: 5, sesionQR: qrse });
+
+        fetch(`https://devgefectivov2.site/v1/enviar-mensaje/${sesionenv}/5/${qrse}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+            // Agrega aquí otros headers si es necesario
+          }
+        });
+
+
+
         // Aquí puedes poner el código del evento que quieres ejecutar.
       }, milliseconds);
     }
