@@ -30,8 +30,6 @@ $(function () {
     $('.textLoading').hide();
     $('#textTime').hide();
     $('#textError').hide();
-
-
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
     var comercio = urlParams.get('comercio');
@@ -44,7 +42,7 @@ $(function () {
     crearQr(comercio, sesion, monto, sesionQR);
     var fechaObjetivo = new Date();
     fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 10);
-   // fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
+
     var intervalo = setInterval(() => {
         var ahora = new Date();
         var diferenciaTiempo = fechaObjetivo - ahora;
@@ -119,8 +117,6 @@ $(function () {
 
     });
 });
-
-
 
 const crearQr = (comercio, sesion, monto,sesionQR) => {
     const qrCode = new QRCodeStyling({
