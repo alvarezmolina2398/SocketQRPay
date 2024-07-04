@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
 
     console.table(messages.filter(message => message.sesion !== data.sesionQR))
    
-    if(data.accion == "3" || data.accion == "4" || data.accion == "5") {
+    if(data.accion == 3 || data.accion == 4 || data.accion == 5) {
       messages =  messages.filter(message => message.sesion !== data.sesionQR);
     }
 
