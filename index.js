@@ -55,9 +55,11 @@ io.on("connection", (socket) => {
 
     messages.push(data);
 
+
+    console.log(messages.filter(message => message.sesion !== data.sesionQR))
    
     if(data.accion == "3" || data.accion == "4" || data.accion == "5") {
-      messages = [];
+      messages =  messages.filter(message => message.sesion !== data.sesionQR);
     }
 
     const messagesReturn = messages.filter((m) => m.sesion == data.sesion);
