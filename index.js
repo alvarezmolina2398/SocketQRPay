@@ -7,7 +7,7 @@ import { Server } from "socket.io";
 const io = new Server(server);
 import fetch from 'node-fetch';
 
-const messages = [];
+let messages = [];
 
 app.use(express.static("public"));
 
