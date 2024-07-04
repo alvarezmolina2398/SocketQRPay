@@ -54,10 +54,14 @@ io.on("connection", (socket) => {
     }
 
     messages.push(data);
-    const messagesReturn = messages.filter((m) => m.sesion == data.sesion);
-    const validos = messagesReturn.filter((m) => m.accion == 1);
 
-    console.log(validos.length);
+
+    if(data.accion == "3" || data.accion == "4" || data.accion == "5") {
+      messages = [];
+    }
+
+    const messagesReturn = messages.filter((m) => m.sesion == data.sesion);
+    const validos = messagesReturn.filter((m) => m.accion == 1 && m.sesionQR == data.sesionQR);
     io.to(data.sesion).emit("messages", validos.length != 0 ? messagesReturn : []);
   });
 });

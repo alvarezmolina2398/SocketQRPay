@@ -37,11 +37,11 @@ $(function () {
     var comercio = urlParams.get('comercio');
     var monto = urlParams.get('monto');
     var usuario = urlParams.get('usuario');
-    var sesionURL = urlParams.get('sesion');
+    var sesion = urlParams.get('sesion');
     montoTxt.text('Q' + parseFloat(monto).toFixed(2));
-    const sesion = generarCadenaAleatoria(6);
+    const sesionQR = generarCadenaAleatoria(6);
     sesionTxt.val(sesion);
-    crearQr(comercio, sesion, monto);
+    crearQr(comercio, sesion, monto, sesionQR);
     var fechaObjetivo = new Date();
     fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 10);
    // fechaObjetivo.setSeconds(fechaObjetivo.getSeconds() + 15);
@@ -65,7 +65,7 @@ $(function () {
     }, 1000);
 
     socket.emit("join-room", sesion);
-    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario, sesionPage: sesionURL },);
+    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario, sesionPage: sesionQR },);
 
 
     socket.on("messages", function (data) {
@@ -122,12 +122,12 @@ $(function () {
 
 
 
-const crearQr = (comercio, sesion, monto) => {
+const crearQr = (comercio, sesion, monto,sesionQR) => {
     const qrCode = new QRCodeStyling({
         width: 250,
         height: 250,
         type: "png",
-        data: `${comercio}/${sesion}/${monto}`,
+        data: `${comercio}/${sesion}/${monto}/${sesionQR}`,
         image: "img/akisi-logo.png",
         dotsOptions: {
             type: "rounded",
