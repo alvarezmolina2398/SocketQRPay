@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
    
     if(data.accion == 3 || data.accion == 4 || data.accion == 5) {
       console.log('si entra e remover pero no remueve');
-      messages =  messages.filter(message => message.sesion !== data.sesionQR);
+      messages =  messages.filter(message => message.sesionQR !== data.sesionQR);
     }
 
     const messagesReturn = messages.filter((m) => m.sesion == data.sesion);
