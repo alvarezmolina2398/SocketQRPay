@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
     }
 
     const messagesReturn = messages.filter((m) => m.sesion == data.sesion);
-    const validos = messagesReturn.filter((m) => m.accion == 1 && m.sesionQR == data.sesionQR);
+    const validos = messagesReturn.filter((m) => m.accion == 1);
     io.to(data.sesion).emit("messages", validos.length != 0 ? messagesReturn : []);
   });
 });
