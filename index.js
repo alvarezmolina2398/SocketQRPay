@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
       const raw = JSON.stringify({
         "sesion": data.sesion ?? "",
         "comercio": data.comercio ?? "",
-        "monto": data.monto  ?? 0,
+        "monto": data.monto ?? 0,
         "usuario_id": data.usuario ?? 'SIN USUARIO',
         "accion": data.accion + "" ?? "0"
       });
@@ -57,15 +57,17 @@ io.on("connection", (socket) => {
 
 
     console.table(messages.filter(message => message.sesion !== data.sesionQR))
-   
-    if(data.accion == 3 || data.accion == 4 || data.accion == 5) {
-      console.log('si entra e remover pero no remueve');
-      messages =  messages.filter(message => message.sesionQR !== data.sesionQR);
-    }
 
     const messagesReturn = messages.filter((m) => m.sesion == data.sesion);
-    const validos = messagesReturn.filter((m) => m.accion == 1 );
+    const validos = messagesReturn.filter((m) => m.accion == 1);
     io.to(data.sesion).emit("messages", validos.length != 0 ? messagesReturn : []);
+
+
+    if (data.accion == 3 || data.accion == 4 || data.accion == 5) {
+      console.log('si entra e remover pero no remueve');
+      messages = messages.filter(message => message.sesionQR !== data.sesionQR);
+    }
+
   });
 });
 
