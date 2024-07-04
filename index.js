@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
 
 
     // Configura los minutos en una variable
-    const minutes = 0.1;
+    const minutes = 10;
 
     // Convierte los minutos a milisegundos
     const milliseconds = minutes * 60 * 1000;
