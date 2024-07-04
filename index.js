@@ -53,23 +53,38 @@ io.on("connection", (socket) => {
       console.log(e);
     }
 
+
+    
+        // Configura los minutos en una variable
+        const minutes = 1;
+
+        // Convierte los minutos a milisegundos
+        const milliseconds = minutes * 60 * 1000;
+
+
+        if (accion == 1) {
+            console.log('la sesion ' + sesion + " se cerrara en " + minutes + " minuto");
+            setTimeout(() => {
+                console.log("Cerrando la sesion " + sesion + " ");
+                socket.emit('new-message', { sesion, accion: 5, sesionQR });
+                // Aquí puedes poner el código del evento que quieres ejecutar.
+            }, milliseconds);
+        }
+
+        
     messages.push(data);
-
-
-    console.table(messages.filter(message => message.sesion !== data.sesionQR))
-
     const messagesReturn = messages.filter((m) => m.sesion == data.sesion);
     const validos = messagesReturn.filter((m) => m.accion == 1);
     io.to(data.sesion).emit("messages", validos.length != 0 ? messagesReturn : []);
 
-
     if (data.accion == 3 || data.accion == 4 || data.accion == 5) {
-      console.log('si entra e remover pero no remueve');
       messages = messages.filter(message => message.sesionQR !== data.sesionQR);
     }
-
   });
 });
+
+
+
 
 server.listen(8080, () => {
   console.log("Servidor corriendo en http://localhost:8080");
