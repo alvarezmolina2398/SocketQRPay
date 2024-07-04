@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
 
     messages.push(data);
 
-    console.table(messages);
+   
     if(data.accion == "3" || data.accion == "4" || data.accion == "5") {
       messages = [];
     }

@@ -63,7 +63,7 @@ $(function () {
     }, 1000);
 
     socket.emit("join-room", sesion);
-    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario, sesionPage: sesionQR },);
+    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario,  sesionQR },);
 
 
     socket.on("messages", function (data) {
