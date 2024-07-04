@@ -59,6 +59,7 @@ io.on("connection", (socket) => {
     console.table(messages.filter(message => message.sesion !== data.sesionQR))
    
     if(data.accion == 3 || data.accion == 4 || data.accion == 5) {
+      console.log('si entra e remover pero no remueve');
       messages =  messages.filter(message => message.sesion !== data.sesionQR);
     }
 
