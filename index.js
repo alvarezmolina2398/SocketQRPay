@@ -66,7 +66,7 @@ io.on("connection", (socket) => {
             console.log('la sesion ' + sesion + " se cerrara en " + minutes + " minuto");
             setTimeout(() => {
                 console.log("Cerrando la sesion " + sesion + " ");
-                socket.emit('new-message', { sesion, accion: 5, sesionQR });
+                socket.emit('new-message', { sesion: data.sesion, accion: 5, sesionQR: data.sesionQR });
                 // Aquí puedes poner el código del evento que quieres ejecutar.
             }, milliseconds);
         }
