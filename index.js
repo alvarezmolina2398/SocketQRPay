@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
         const milliseconds = minutes * 60 * 1000;
 
 
-        if (accion == 1) {
+        if (data.accion == 1) {
             console.log('la sesion ' + sesion + " se cerrara en " + minutes + " minuto");
             setTimeout(() => {
                 console.log("Cerrando la sesion " + sesion + " ");
@@ -71,7 +71,7 @@ io.on("connection", (socket) => {
             }, milliseconds);
         }
 
-        
+
     messages.push(data);
     const messagesReturn = messages.filter((m) => m.sesion == data.sesion);
     const validos = messagesReturn.filter((m) => m.accion == 1);
