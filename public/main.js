@@ -1,6 +1,6 @@
 //var socket = io.connect("https://rpgbq1fd-8080.use2.devtunnels.ms", { forceNew: true });
-var socket = io.connect('https://devgefectivov2.site', { forceNew: true });
-//var socket = io.connect('http://localhost:8080', { forceNew: true });
+//var socket = io.connect('https://devgefectivov2.site', { forceNew: true });
+var socket = io.connect('http://localhost:8080', { forceNew: true });
 
 
 const generarCadenaAleatoria = (cantidad) => {
@@ -67,7 +67,6 @@ $(function () {
 
 
     socket.on("messages", function (data) {
-        console.log(data);
         var message = data[data.length - 1];
         if (message.accion != '6') {
             $('#pn-qr').hide();
@@ -83,6 +82,7 @@ $(function () {
         }
 
         if (message.accion === 2) {
+            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'escanear', } }, '*');
             $('#time').show();
             $('.textLoading').show();
             $('#pn-cargando').show();
@@ -90,16 +90,19 @@ $(function () {
         }
         else if (message.accion === 3) {
             clearInterval(intervalo);
+            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'compra', datos: {trxPronet: message.trxPronet, trxByte:message.TransaccionByte } } }, '*');
             $('#pn-exito').show();
             $('#pn-exito').addClass("animate__fadeIn");
         }
         else if ((message.accion) === 4) {
+            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'error', } }, '*');
             $('#pn-error').show();
             $('#pn-error').addClass("animate__headShake");
             $('#textError').show();
 
         }
         else if (message.accion === 5) {
+            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'timeout', } }, '*');
             $('#time').hide();
             $('#textInicio').hide();
             $('#textError').show();
@@ -108,6 +111,7 @@ $(function () {
             clearInterval(intervalo);
         }
         else if (message.accion === 0 || message.accion === 1) {
+            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'inicio', } }, '*');
             $('#time').show();
             $('#pn-qr').show();
             $('#pn-descripcion').show();

@@ -68,8 +68,9 @@ io.on("connection", (socket) => {
 
         const sesionenv = data.sesion;
         const qrse = data.sesionQR;
-
-        fetch(`https://devgefectivov2.site/v1/enviar-mensaje/${sesionenv}/5/${qrse}`, {
+        const url = 'https://devgefectivov2.site'
+       // const url  = 'localhost:8080';
+        fetch(`${url}/v1/enviar-mensaje/${sesionenv}/5/${qrse}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
