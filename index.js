@@ -20,7 +20,7 @@ app.get("/hello", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("Alguien se ha conectado con Sockets");
+  console.log("Alguien se ha conectado con Sockets QRPOS");
 
   socket.on("join-room", (username) => {
     socket.join(username);
@@ -51,7 +51,6 @@ io.on("connection", (socket) => {
         redirect: "follow"
       };
       const url = "https://appsip.genesisempresarial.com/GEfectivoAdminDes/api/LogBotonPago/InsertLogBotonPago";
-      //const url = "https://appsip.genesisempresarial.com/GEfectivoAdmin/api/LogBotonPago/InsertLogBotonPago"
       fetch(url, requestOptions)
         .then((response) => response.text())
         .then((result) => console.log(result))
