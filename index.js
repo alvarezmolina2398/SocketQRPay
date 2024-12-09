@@ -6,14 +6,10 @@ const server = http.createServer(app);
 import { Server } from "socket.io";
 
 
-const io = new Server(server, {
-  path: '/QRPOS', // Ruta del WebSocket
-  cors: {
-    origin: "*", // Permitir todas las conexiones
-    methods: ["GET", "POST"], // Métodos permitidos
-    credentials: false, // No requerir credenciales
-  },
-});
+const io = new Server(server);
+const customNamespace = io.of('/QRPOS');
+
+
 
 import fetch from 'node-fetch';
 let messages = [];
@@ -24,7 +20,7 @@ app.get("/hello", (req, res) => {
   res.status(200).send("Hello World!");
 });
 
-io.on("connection", (socket) => {
+customNamespace.on("connection", (socket) => {
   console.log("Alguien se ha conectado con Sockets");
 
   socket.on("join-room", (username) => {

@@ -1,5 +1,4 @@
-var socket = io.connect('https://devgefectivov2.site', {
-    path: '/QRPOS',
+var socket = io.connect('https://devgefectivov2.site/QRPOS/', {
     transports: ['websocket'], // Forzar el uso de WebSocket
     forceNew: true // Crear una nueva conexión cada vez
   });
