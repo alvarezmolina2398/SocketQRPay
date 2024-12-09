@@ -4,12 +4,18 @@ const app = express();
 import http from "http";
 const server = http.createServer(app);
 import { Server } from "socket.io";
+
+
 const io = new Server(server, {
-  path: '/QRPOS', // Ruta para el WebSocket
+  path: '/QRPOS', // Ruta del WebSocket
+  cors: {
+    origin: "*", // Permitir todas las conexiones
+    methods: ["GET", "POST"], // Métodos permitidos
+    credentials: false, // No requerir credenciales
+  },
 });
 
 import fetch from 'node-fetch';
-const urlSocket = "";
 let messages = [];
 
 app.use(express.static("public"));
@@ -59,8 +65,6 @@ io.on("connection", (socket) => {
       console.log(e);
     }
 
-
-
     // Configura los minutos en una variable
     const minutes = 10;
 
@@ -74,7 +78,7 @@ io.on("connection", (socket) => {
 
         const sesionenv = data.sesion;
         const qrse = data.sesionQR;
-        const url = 'https://devgefectivov2.site/POSQR'
+        const url = 'https://devgefectivov2.site/QrPosApi'
         // const url  = 'localhost:8080';
         fetch(`${url}/v1/enviar-mensaje/${sesionenv}/5/${qrse}`, {
           method: 'GET',
