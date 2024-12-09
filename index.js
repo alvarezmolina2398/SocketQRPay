@@ -29,6 +29,7 @@ io.on("connection", (socket) => {
 
   socket.on("new-message", (data) => {
     try {
+      console.log('https://appsip.genesisempresarial.com/GEfectivoAdminDes');
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("Cookie", "cookiesession1=678A3E10E82C9FD71F9E281AAD4522E9");
