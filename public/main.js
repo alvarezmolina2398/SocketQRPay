@@ -1,7 +1,4 @@
-var socket = io.connect('https://devgefectivov2.site/QRPOS/', {
-    transports: ['websocket'], // Forzar el uso de WebSocket
-    forceNew: true // Crear una nueva conexión cada vez
-  });
+const socket = io();
 
 const generarCadenaAleatoria = (cantidad) => {
     //const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

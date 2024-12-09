@@ -7,7 +7,6 @@ import { Server } from "socket.io";
 
 
 const io = new Server(server);
-const customNamespace = io.of('/QRPOS');
 
 
 
@@ -20,7 +19,7 @@ app.get("/hello", (req, res) => {
   res.status(200).send("Hello World!");
 });
 
-customNamespace.on("connection", (socket) => {
+io.on("connection", (socket) => {
   console.log("Alguien se ha conectado con Sockets");
 
   socket.on("join-room", (username) => {
