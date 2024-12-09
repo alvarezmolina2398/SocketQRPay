@@ -9,8 +9,7 @@ import { Server } from "socket.io";
 const io = new Server(server, {
     path: '/POSQR',
   cors: {
-      origin: false,
-      methods: ["GET", "POST"],
+      origin: false
   },
 });
 
