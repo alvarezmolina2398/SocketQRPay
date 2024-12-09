@@ -1,4 +1,7 @@
-const socket = io();
+const socket = io("https://devgefectivov2.site", {
+    path: "/POSQR",
+    transports: ["websocket"], // Asegúrate de que usa WebSockets directamente
+});
 
 const generarCadenaAleatoria = (cantidad) => {
     //const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

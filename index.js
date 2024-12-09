@@ -6,7 +6,12 @@ const server = http.createServer(app);
 import { Server } from "socket.io";
 
 
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+  },
+});
 
 
 
