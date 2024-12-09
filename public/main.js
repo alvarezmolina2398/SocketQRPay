@@ -1,4 +1,4 @@
-var socket = io.connect('https://devgefectivov2.site/POSQR', { forceNew: true });
+var socket = io.connect('https://devgefectivov2.site/QRPOS', { forceNew: true });
 
 
 const generarCadenaAleatoria = (cantidad) => {
