@@ -4,7 +4,10 @@ const app = express();
 import http from "http";
 const server = http.createServer(app);
 import { Server } from "socket.io";
-const io = new Server(server);
+const io = new Server(server, {
+  path: '/QRPOS', // Ruta para el WebSocket
+});
+
 import fetch from 'node-fetch';
 const urlSocket = "";
 let messages = [];
@@ -66,13 +69,13 @@ io.on("connection", (socket) => {
 
 
     if (data.accion == 1) {
-    
+
       setTimeout(() => {
 
         const sesionenv = data.sesion;
         const qrse = data.sesionQR;
         const url = 'https://devgefectivov2.site/POSQR'
-       // const url  = 'localhost:8080';
+        // const url  = 'localhost:8080';
         fetch(`${url}/v1/enviar-mensaje/${sesionenv}/5/${qrse}`, {
           method: 'GET',
           headers: {
