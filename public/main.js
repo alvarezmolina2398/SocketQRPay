@@ -1,6 +1,4 @@
-//var socket = io.connect("https://rpgbq1fd-8080.use2.devtunnels.ms", { forceNew: true });
-//var socket = io.connect('https://devgefectivov2.site', { forceNew: true });
-var socket = io.connect('http://localhost:8080', { forceNew: true });
+var socket = io.connect('https://devgefectivov2.site/POSQR', { forceNew: true });
 
 
 const generarCadenaAleatoria = (cantidad) => {
@@ -58,8 +56,6 @@ $(function () {
             $('#time').text(minutosRestantes + " minutos " + segundosRestantes + " segundos ");
         }
 
-        // Si la cuenta regresiva ha alcanzado cero, realiza alguna acción adicional si es necesario
-
     }, 1000);
 
     socket.emit("join-room", sesion);
@@ -84,7 +80,7 @@ $(function () {
         if (message.accion === 2) {
             window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'escanear', } }, '*');
             $('#time').show();
-            $('.textLoading').show();
+         //   $('.textLoading').show();
             $('#pn-cargando').show();
             $('#pn-cargando').addClass("animate__fadeIn");
         }
@@ -115,7 +111,7 @@ $(function () {
             $('#time').show();
             $('#pn-qr').show();
             $('#pn-descripcion').show();
-            $('#textInicio').show();
+           // $('#textInicio').show();
             $('#btnFixed').show();
         }
 
@@ -128,71 +124,11 @@ const crearQr = (comercio, sesion, monto,sesionQR) => {
         height: 250,
         type: "png",
         data: `${comercio}/${sesion}/${monto}/${sesionQR}`,
-        image: "img/akisi-logo.png",
+        //image: "img/akisi-logo.png",
         dotsOptions: {
-            type: "rounded",
-            color: "#82298F",
+            type: "none",
+            color: "#000",
             gradient: null
-        },
-        dotsOptionsHelper: {
-            colorType: {
-                single: true,
-                gradient: false
-            },
-            gradient: {
-                linear: true,
-                radial: false,
-                color1: "#6a1a4c",
-                color2: "#6a1a4c",
-                rotation: "0"
-            }
-        },
-        cornersSquareOptions: {
-            type: "extra-rounded",
-            color: "#82298F"
-        },
-        cornersSquareOptionsHelper: {
-            colorType: {
-                single: true,
-                gradient: false
-            },
-            gradient: {
-                linear: true,
-                radial: false,
-                color1: "#82298F",
-                color2: "#82298F",
-                rotation: "0"
-            }
-        },
-        cornersDotOptions: {
-            type: "dot",
-            color: "#82298F"
-        },
-        cornersDotOptionsHelper: {
-            colorType: {
-                single: true,
-                gradient: false
-            },
-            gradient: {
-                linear: true,
-                radial: false,
-                color1: "#000000",
-                color2: "#000000",
-                rotation: "0"
-            }
-        },
-        backgroundOptionsHelper: {
-            colorType: {
-                single: true,
-                gradient: false
-            },
-            gradient: {
-                linear: true,
-                radial: false,
-                color1: "#ffffff",
-                color2: "#ffffff",
-                rotation: "0"
-            }
         },
         imageOptions: {
             crossOrigin: "anonymous",

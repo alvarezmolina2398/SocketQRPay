@@ -6,7 +6,7 @@ const server = http.createServer(app);
 import { Server } from "socket.io";
 const io = new Server(server);
 import fetch from 'node-fetch';
-
+const urlSocket = "";
 let messages = [];
 
 app.use(express.static("public"));
@@ -34,7 +34,9 @@ io.on("connection", (socket) => {
         "comercio": data.comercio ?? "",
         "monto": data.monto ?? 0,
         "usuario_id": data.usuario ?? 'SIN USUARIO',
-        "accion": data.accion + "" ?? "0"
+        "accion": data.accion + "" ?? "0",
+        "referenciaByte": data.TransaccionByte ?? "N/A",
+        "referenciaPronet": data.trxPronet ?? "N/A"
       });
 
       const requestOptions = {
@@ -43,8 +45,9 @@ io.on("connection", (socket) => {
         body: raw,
         redirect: "follow"
       };
-
-      fetch("https://appsip.genesisempresarial.com/GEfectivoAdmin/api/LogBotonPago/InsertLogBotonPago", requestOptions)
+      const url = "https://appsip.genesisempresarial.com/GEfectivoAdminDes/api/LogBotonPago/InsertLogBotonPago";
+      //const url = "https://appsip.genesisempresarial.com/GEfectivoAdmin/api/LogBotonPago/InsertLogBotonPago"
+      fetch(url, requestOptions)
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.error(error));
@@ -63,12 +66,12 @@ io.on("connection", (socket) => {
 
 
     if (data.accion == 1) {
-      console.log('la sesion ' + data.sesion + " se cerrara en " + minutes + " minuto");
+    
       setTimeout(() => {
 
         const sesionenv = data.sesion;
         const qrse = data.sesionQR;
-        const url = 'https://devgefectivov2.site'
+        const url = 'https://devgefectivov2.site/POSQR'
        // const url  = 'localhost:8080';
         fetch(`${url}/v1/enviar-mensaje/${sesionenv}/5/${qrse}`, {
           method: 'GET',
@@ -99,6 +102,6 @@ io.on("connection", (socket) => {
 
 
 
-server.listen(8080, () => {
-  console.log("Servidor corriendo en http://localhost:8080");
+server.listen(8082, () => {
+  console.log("Servidor corriendo en http://localhost:8082");
 });

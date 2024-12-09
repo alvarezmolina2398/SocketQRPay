@@ -38,7 +38,7 @@ body {
 }
 
 .pn-canvas { 
-    border: #fe8100 2px solid;
+    /* border: #fe8100 2px solid; */
     border-radius: 20px;
     padding: 15px;
     background-color: #fff;
@@ -198,6 +198,6 @@ body {
 
 .fixed-botton {
     position: fixed;
-    bottom: 10px;
+    bottom: 20px;
     right: 10px;
 }
