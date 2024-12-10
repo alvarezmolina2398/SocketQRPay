@@ -1,9 +1,10 @@
-const socket = io("https://devgefectivov2.site", {
-    path: "/POSQR", // La misma ruta que en el servidor
-    transports: ["polling", "websocket"],
-});
+//var socket = io.connect("https://rpgbq1fd-8080.use2.devtunnels.ms", { forceNew: true });
+var socket = io.connect('https://devgefectivov2.site', { forceNew: true });
+//var socket = io.connect('http://localhost:8080', { forceNew: true });
+
 
 const generarCadenaAleatoria = (cantidad) => {
+    //const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let cadenaAleatoria = '';
 
@@ -15,98 +16,179 @@ const generarCadenaAleatoria = (cantidad) => {
     return cadenaAleatoria;
 }
 
+
 const montoTxt = $('#monto');
 const sesionTxt = $('#sesion');
 
-$(function () {
-    $('#pn-error, #pn-exito, #pn-descripcion, #pn-qr, #textInicio, .textLoading, #textTime, #textError').hide();
 
+$(function () {
+    $('#pn-error').hide();
+    $('#pn-exito').hide();
+    $('#pn-descripcion').hide();
+    $('#pn-qr').hide();
+    $('#textInicio').hide();
+    $('.textLoading').hide();
+    $('#textTime').hide();
+    $('#textError').hide();
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
-    const comercio = urlParams.get('comercio');
-    const monto = urlParams.get('monto');
-    const usuario = urlParams.get('usuario');
-    const sesion = urlParams.get('sesion');
+    var comercio = urlParams.get('comercio');
+    var monto = urlParams.get('monto');
+    var usuario = urlParams.get('usuario');
+    var sesion = urlParams.get('sesion');
     montoTxt.text('Q' + parseFloat(monto).toFixed(2));
-
     const sesionQR = generarCadenaAleatoria(6);
     sesionTxt.val(sesion);
     crearQr(comercio, sesion, monto, sesionQR);
-
-    const fechaObjetivo = new Date();
+    var fechaObjetivo = new Date();
     fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 10);
 
-    const intervalo = setInterval(() => {
-        const ahora = new Date();
-        const diferenciaTiempo = fechaObjetivo - ahora;
+    var intervalo = setInterval(() => {
+        var ahora = new Date();
+        var diferenciaTiempo = fechaObjetivo - ahora;
+
+        // Calcula minutos y segundos restantes
+        var minutosRestantes = Math.floor((diferenciaTiempo / 1000 / 60) % 60);
+        var segundosRestantes = Math.floor((diferenciaTiempo / 1000) % 60);
 
         if (diferenciaTiempo <= 0) {
-            clearInterval(intervalo);
-            socket.emit("new-message", { sesion, comercio, monto, accion: 5 });
+            socket.emit("new-message", { sesion, comercio, monto, accion: 5 },);
         } else {
-            const minutosRestantes = Math.floor((diferenciaTiempo / 1000 / 60) % 60);
-            const segundosRestantes = Math.floor((diferenciaTiempo / 1000) % 60);
-            $('#time').text(`${minutosRestantes} minutos ${segundosRestantes} segundos`);
+            // Muestra la cuenta regresiva
+            $('#time').text(minutosRestantes + " minutos " + segundosRestantes + " segundos ");
         }
+
+        // Si la cuenta regresiva ha alcanzado cero, realiza alguna acción adicional si es necesario
+
     }, 1000);
 
     socket.emit("join-room", sesion);
-    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario, sesionQR });
+    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario,  sesionQR },);
+
 
     socket.on("messages", function (data) {
-        const message = data[data.length - 1];
-
-        if (![0, 1, 2, 3, 4, 5].includes(message.accion)) return;
-
-        $('#pn-qr, #pn-cargando, #pn-error, #pn-exito, #pn-descripcion, #textInicio, .textLoading, #time, #textError, #btnFixed').hide();
-
-        switch (message.accion) {
-            case 2:
-                window.parent.postMessage({ event: 'cuotasGenesisAccion', data: { accion: 'escanear' } }, '*');
-                $('#time, #pn-cargando').show();
-                $('#pn-cargando').addClass("animate__fadeIn");
-                break;
-
-            case 3:
-                clearInterval(intervalo);
-                window.parent.postMessage({
-                    event: 'cuotasGenesisAccion',
-                    data: { accion: 'compra', datos: { trxPronet: message.trxPronet, trxByte: message.TransaccionByte } }
-                }, '*');
-                $('#pn-exito').show().addClass("animate__fadeIn");
-                break;
-
-            case 4:
-                window.parent.postMessage({ event: 'cuotasGenesisAccion', data: { accion: 'error' } }, '*');
-                $('#pn-error, #textError').show();
-                $('#pn-error').addClass("animate__headShake");
-                break;
-
-            case 5:
-                clearInterval(intervalo);
-                window.parent.postMessage({ event: 'cuotasGenesisAccion', data: { accion: 'timeout' } }, '*');
-                $('#textError, #pn-error').show();
-                $('#pn-error').addClass("animate__headShake");
-                break;
-
-            case 0:
-            case 1:
-                window.parent.postMessage({ event: 'cuotasGenesisAccion', data: { accion: 'inicio' } }, '*');
-                $('#time, #pn-qr, #pn-descripcion, #btnFixed').show();
-                break;
+        console.log(data);
+        var message = data[data.length - 1];
+        if (message.accion != '6') {
+            $('#pn-qr').hide();
+            $('#pn-cargando').hide();
+            $('#pn-error').hide();
+            $('#pn-exito').hide();
+            $('#pn-descripcion').hide();
+            $('#textInicio').hide();
+            $('.textLoading').hide();
+            $('#time').hide();
+            $('#textError').hide();
+            $('#btnFixed').hide();
         }
+
+        if (message.accion === 2) {
+            $('#time').show();
+            $('.textLoading').show();
+            $('#pn-cargando').show();
+            $('#pn-cargando').addClass("animate__fadeIn");
+        }
+        else if (message.accion === 3) {
+            clearInterval(intervalo);
+            $('#pn-exito').show();
+            $('#pn-exito').addClass("animate__fadeIn");
+        }
+        else if ((message.accion) === 4) {
+            $('#pn-error').show();
+            $('#pn-error').addClass("animate__headShake");
+            $('#textError').show();
+
+        }
+        else if (message.accion === 5) {
+            $('#time').hide();
+            $('#textInicio').hide();
+            $('#textError').show();
+            $('#pn-error').show();
+            $('#pn-error').addClass("animate__headShake");
+            clearInterval(intervalo);
+        }
+        else if (message.accion === 0 || message.accion === 1) {
+            $('#time').show();
+            $('#pn-qr').show();
+            $('#pn-descripcion').show();
+            $('#textInicio').show();
+            $('#btnFixed').show();
+        }
+
     });
 });
 
-const crearQr = (comercio, sesion, monto, sesionQR) => {
+const crearQr = (comercio, sesion, monto,sesionQR) => {
     const qrCode = new QRCodeStyling({
         width: 250,
         height: 250,
         type: "png",
         data: `${comercio}/${sesion}/${monto}/${sesionQR}`,
+        image: "img/akisi-logo.png",
         dotsOptions: {
-            type: "none",
-            color: "#000",
+            type: "rounded",
+            color: "#82298F",
+            gradient: null
+        },
+        dotsOptionsHelper: {
+            colorType: {
+                single: true,
+                gradient: false
+            },
+            gradient: {
+                linear: true,
+                radial: false,
+                color1: "#6a1a4c",
+                color2: "#6a1a4c",
+                rotation: "0"
+            }
+        },
+        cornersSquareOptions: {
+            type: "extra-rounded",
+            color: "#82298F"
+        },
+        cornersSquareOptionsHelper: {
+            colorType: {
+                single: true,
+                gradient: false
+            },
+            gradient: {
+                linear: true,
+                radial: false,
+                color1: "#82298F",
+                color2: "#82298F",
+                rotation: "0"
+            }
+        },
+        cornersDotOptions: {
+            type: "dot",
+            color: "#82298F"
+        },
+        cornersDotOptionsHelper: {
+            colorType: {
+                single: true,
+                gradient: false
+            },
+            gradient: {
+                linear: true,
+                radial: false,
+                color1: "#000000",
+                color2: "#000000",
+                rotation: "0"
+            }
+        },
+        backgroundOptionsHelper: {
+            colorType: {
+                single: true,
+                gradient: false
+            },
+            gradient: {
+                linear: true,
+                radial: false,
+                color1: "#ffffff",
+                color2: "#ffffff",
+                rotation: "0"
+            }
         },
         imageOptions: {
             crossOrigin: "anonymous",
@@ -115,4 +197,5 @@ const crearQr = (comercio, sesion, monto, sesionQR) => {
     });
 
     qrCode.append(document.getElementById("canvas"));
-};
+}
+

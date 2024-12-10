@@ -6,14 +6,7 @@ import fetch from "node-fetch";
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  path: '/POSQR',
-  transports: ['polling', 'websocket'],
-  cors: {
-    origin: "*", // Permite cualquier dominio
-    methods: ["GET", "POST"], // Métodos permitidos
-  },
-});
+const io = new Server(server);
 
 // Almacén de mensajes
 let messages = [];
@@ -55,9 +48,9 @@ io.on("connection", (socket) => {
       }
 
       console.log("Procesando nuevo mensaje:", data);
-
+      const env = data.env == "dev" ? 'GEfectivoAdminDes' : 'GEfectivoAdmin'
       // Llamada al API externo
-      const url = "https://appsip.genesisempresarial.com/GEfectivoAdminDes/api/LogBotonPago/InsertLogBotonPago";
+      const url = "https://appsip.genesisempresarial.com/" + env + "/api/LogBotonPago/InsertLogBotonPago";
       const payload = {
         sesion: data.sesion ?? "",
         comercio: data.comercio ?? "",
@@ -85,7 +78,7 @@ io.on("connection", (socket) => {
       if (data.accion === 1) {
         const milliseconds = 10 * 60 * 1000; // 10 minutos
         setTimeout(() => {
-          const qrUrl = `https://devgefectivov2.site/QrPosApi/v1/enviar-mensaje/${data.sesion}/5/${data.sesionQR}`;
+          const qrUrl = `https://devgefectivov2.site/v1/enviar-mensaje/${data.sesion}/5/${data.sesionQR}`;
           fetch(qrUrl, { method: "GET" })
             .then((res) => console.log("QR Timeout enviado:", res.status))
             .catch((err) => console.error("Error enviando QR Timeout:", err));
