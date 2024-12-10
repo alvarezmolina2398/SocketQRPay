@@ -1,11 +1,10 @@
 const socket = io("https://devgefectivov2.site", {
-    path: "/POSQR", 
-    transports: ['polling'],
-    allowEIO3: true, // Forzar WebSocket// Asegúrate de que usa WebSockets directamente
+    path: "/POSQR",
+    transports: ['polling', 'websocket'],
+    allowEIO3: true,
 });
 
 const generarCadenaAleatoria = (cantidad) => {
-    //const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let cadenaAleatoria = '';
 
@@ -17,121 +16,98 @@ const generarCadenaAleatoria = (cantidad) => {
     return cadenaAleatoria;
 }
 
-
 const montoTxt = $('#monto');
 const sesionTxt = $('#sesion');
 
-
 $(function () {
-    $('#pn-error').hide();
-    $('#pn-exito').hide();
-    $('#pn-descripcion').hide();
-    $('#pn-qr').hide();
-    $('#textInicio').hide();
-    $('.textLoading').hide();
-    $('#textTime').hide();
-    $('#textError').hide();
+    $('#pn-error, #pn-exito, #pn-descripcion, #pn-qr, #textInicio, .textLoading, #textTime, #textError').hide();
+
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
-    var comercio = urlParams.get('comercio');
-    var monto = urlParams.get('monto');
-    var usuario = urlParams.get('usuario');
-    var sesion = urlParams.get('sesion');
+    const comercio = urlParams.get('comercio');
+    const monto = urlParams.get('monto');
+    const usuario = urlParams.get('usuario');
+    const sesion = urlParams.get('sesion');
     montoTxt.text('Q' + parseFloat(monto).toFixed(2));
+
     const sesionQR = generarCadenaAleatoria(6);
     sesionTxt.val(sesion);
     crearQr(comercio, sesion, monto, sesionQR);
-    var fechaObjetivo = new Date();
+
+    const fechaObjetivo = new Date();
     fechaObjetivo.setMinutes(fechaObjetivo.getMinutes() + 10);
 
-    var intervalo = setInterval(() => {
-        var ahora = new Date();
-        var diferenciaTiempo = fechaObjetivo - ahora;
-
-        // Calcula minutos y segundos restantes
-        var minutosRestantes = Math.floor((diferenciaTiempo / 1000 / 60) % 60);
-        var segundosRestantes = Math.floor((diferenciaTiempo / 1000) % 60);
+    const intervalo = setInterval(() => {
+        const ahora = new Date();
+        const diferenciaTiempo = fechaObjetivo - ahora;
 
         if (diferenciaTiempo <= 0) {
-            socket.emit("new-message", { sesion, comercio, monto, accion: 5 },);
+            clearInterval(intervalo);
+            socket.emit("new-message", { sesion, comercio, monto, accion: 5 });
         } else {
-            // Muestra la cuenta regresiva
-            $('#time').text(minutosRestantes + " minutos " + segundosRestantes + " segundos ");
+            const minutosRestantes = Math.floor((diferenciaTiempo / 1000 / 60) % 60);
+            const segundosRestantes = Math.floor((diferenciaTiempo / 1000) % 60);
+            $('#time').text(`${minutosRestantes} minutos ${segundosRestantes} segundos`);
         }
-
     }, 1000);
 
     socket.emit("join-room", sesion);
-    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario,  sesionQR },);
-
+    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario, sesionQR });
 
     socket.on("messages", function (data) {
-        var message = data[data.length - 1];
-        if (message.accion != '6') {
-            $('#pn-qr').hide();
-            $('#pn-cargando').hide();
-            $('#pn-error').hide();
-            $('#pn-exito').hide();
-            $('#pn-descripcion').hide();
-            $('#textInicio').hide();
-            $('.textLoading').hide();
-            $('#time').hide();
-            $('#textError').hide();
-            $('#btnFixed').hide();
-        }
+        const message = data[data.length - 1];
 
-        if (message.accion === 2) {
-            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'escanear', } }, '*');
-            $('#time').show();
-         //   $('.textLoading').show();
-            $('#pn-cargando').show();
-            $('#pn-cargando').addClass("animate__fadeIn");
-        }
-        else if (message.accion === 3) {
-            clearInterval(intervalo);
-            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'compra', datos: {trxPronet: message.trxPronet, trxByte:message.TransaccionByte } } }, '*');
-            $('#pn-exito').show();
-            $('#pn-exito').addClass("animate__fadeIn");
-        }
-        else if ((message.accion) === 4) {
-            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'error', } }, '*');
-            $('#pn-error').show();
-            $('#pn-error').addClass("animate__headShake");
-            $('#textError').show();
+        if (![0, 1, 2, 3, 4, 5].includes(message.accion)) return;
 
-        }
-        else if (message.accion === 5) {
-            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'timeout', } }, '*');
-            $('#time').hide();
-            $('#textInicio').hide();
-            $('#textError').show();
-            $('#pn-error').show();
-            $('#pn-error').addClass("animate__headShake");
-            clearInterval(intervalo);
-        }
-        else if (message.accion === 0 || message.accion === 1) {
-            window.parent.postMessage({ event: 'cuotasGenesisAccion', data: {accion: 'inicio', } }, '*');
-            $('#time').show();
-            $('#pn-qr').show();
-            $('#pn-descripcion').show();
-           // $('#textInicio').show();
-            $('#btnFixed').show();
-        }
+        $('#pn-qr, #pn-cargando, #pn-error, #pn-exito, #pn-descripcion, #textInicio, .textLoading, #time, #textError, #btnFixed').hide();
 
+        switch (message.accion) {
+            case 2:
+                window.parent.postMessage({ event: 'cuotasGenesisAccion', data: { accion: 'escanear' } }, '*');
+                $('#time, #pn-cargando').show();
+                $('#pn-cargando').addClass("animate__fadeIn");
+                break;
+
+            case 3:
+                clearInterval(intervalo);
+                window.parent.postMessage({
+                    event: 'cuotasGenesisAccion',
+                    data: { accion: 'compra', datos: { trxPronet: message.trxPronet, trxByte: message.TransaccionByte } }
+                }, '*');
+                $('#pn-exito').show().addClass("animate__fadeIn");
+                break;
+
+            case 4:
+                window.parent.postMessage({ event: 'cuotasGenesisAccion', data: { accion: 'error' } }, '*');
+                $('#pn-error, #textError').show();
+                $('#pn-error').addClass("animate__headShake");
+                break;
+
+            case 5:
+                clearInterval(intervalo);
+                window.parent.postMessage({ event: 'cuotasGenesisAccion', data: { accion: 'timeout' } }, '*');
+                $('#textError, #pn-error').show();
+                $('#pn-error').addClass("animate__headShake");
+                break;
+
+            case 0:
+            case 1:
+                window.parent.postMessage({ event: 'cuotasGenesisAccion', data: { accion: 'inicio' } }, '*');
+                $('#time, #pn-qr, #pn-descripcion, #btnFixed').show();
+                break;
+        }
     });
 });
 
-const crearQr = (comercio, sesion, monto,sesionQR) => {
+const crearQr = (comercio, sesion, monto, sesionQR) => {
     const qrCode = new QRCodeStyling({
         width: 250,
         height: 250,
         type: "png",
         data: `${comercio}/${sesion}/${monto}/${sesionQR}`,
-        //image: "img/akisi-logo.png",
         dotsOptions: {
             type: "none",
             color: "#000",
-            gradient: null
         },
         imageOptions: {
             crossOrigin: "anonymous",
@@ -140,6 +116,4 @@ const crearQr = (comercio, sesion, monto,sesionQR) => {
     });
 
     qrCode.append(document.getElementById("canvas"));
-}
-
-
+};
