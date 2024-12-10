@@ -1,5 +1,6 @@
 const socket = io("https://devgefectivov2.site", {
-    path: "/POSQR", // Asegúrate de que usa WebSockets directamente
+    path: "/POSQR", 
+    transports: ['websocket'], // Forzar WebSocket// Asegúrate de que usa WebSockets directamente
 });
 
 const generarCadenaAleatoria = (cantidad) => {
