@@ -110,6 +110,12 @@ io.on("connection", (socket) => {
   });
 });
 
+io.engine.on("connection_error", (err) => {
+  console.error("Error de conexión:", err.req); // Solicitud fallida
+  console.error("Código:", err.code); // Código de error
+  console.error("Mensaje:", err.message); // Mensaje de error
+});
+
 // Servidor escuchando
 server.listen(8082, () => {
   console.log("Servidor corriendo en http://localhost:8082");
