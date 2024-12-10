@@ -8,7 +8,8 @@ import { Server } from "socket.io";
 
 const io = new Server(server, {
   path: '/POSQR',
-  transports: ['polling'],
+  transports: ['polling', 'websocket'],
+  allowEIO3: true,
   cors: {
     origin: false
   },
