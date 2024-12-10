@@ -110,6 +110,6 @@ io.engine.on("connection_error", (err) => {
 });
 
 // Servidor escuchando
-server.listen(8082, () => {
+server.listen(8080, () => {
   console.log("Servidor corriendo en http://localhost:8082");
 });
