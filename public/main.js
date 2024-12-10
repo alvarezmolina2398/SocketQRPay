@@ -1,7 +1,7 @@
 const socket = io("https://devgefectivov2.site", {
     path: "/POSQR", // La misma ruta que en el servidor
-    transports: ['polling', 'websocket'], // Asegura compatibilidad con ambos transportes
-  });
+    transports: ["polling", "websocket"],
+});
 
 const generarCadenaAleatoria = (cantidad) => {
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
