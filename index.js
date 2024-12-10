@@ -7,12 +7,13 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  path: '/POSQR',
-  transports: ['polling', 'websocket'], // Ambos transportes permitidos
+  path: '/POSQR', // La ruta debe coincidir exactamente con lo esperado por NGINX y el cliente
+  transports: ['polling', 'websocket'],
   cors: {
-    origin: false, // Asegúrate de que esta configuración cumple con tus necesidades
+    origin: false,
   },
 });
+
 
 // Almacén de mensajes
 let messages = [];
