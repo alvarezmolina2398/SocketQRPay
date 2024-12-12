@@ -1,4 +1,5 @@
-const socket = io("https://devgefectivov2.site");
+//const socket = io("https://devgefectivov2.site");
+const socket = io("localhost:8080");
 
 const generarCadenaAleatoria = (cantidad) => {
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -97,9 +98,10 @@ $(function () {
 
 const crearQr = (comercio, sesion, monto, sesionQR) => {
     const qrCode = new QRCodeStyling({
-        width: 300,
-        height: 300,
+        width: 250,
+        height: 250,
         type: "png",
+        image: "img/akisi-logo.png",
         data: `${comercio}/${sesion}/${monto}/${sesionQR}`,
         dotsOptions: {
             type: "extra-rounded",

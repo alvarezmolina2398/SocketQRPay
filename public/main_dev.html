@@ -15,39 +15,41 @@
 
 <body>
   <div class="row">
-    <!-- Columna que se muestra siempre --> 
+    <!-- Columna que se muestra siempre -->
     <div class="col-12 col-lg-6 full-height">
-      <div class="">
-        <h5 id="textInicio" class="text-center-h mt-5 font-weight-bold">Escanea el código QR</h5>
-        <h5 class="text-center-h font-weight-bold textLoading" style="display: none;margin-top: 20px;">Espera a que el cliente</h5>
-        <h5 class="text-center-h font-weight-bold textLoading" style="display: none;">confirme la compra</h5>
-        <h5  id="textError" class="text-center-h mt-5 font-weight-bold" style="display: none; margin-left: 5px;margin-right: 5px;">Error al escanear el código por favor inténtalo de nuevo.</h5>
-        <h5  id="textTime" class="text-center-h mt-5 font-weight-bold" style="display: none;">Tiempo agotado.</h5>
-        <div id="pn-1" class="d-flex flex-column align-items-center justify-content-center">
-          <div class="pn-canvas animate__animated animate__bounce" id="pn-qr" style="display: none;">
-            <div id="canvas">
+      <h5 id="textInicio" class="text-center-h mt-5 font-weight-bold">Escanea el código QR</h5>
+      <h5 class="text-center-h font-weight-bold textLoading" style="display: none;margin-top: 20px;">Espera a que el
+        cliente</h5>
+      <h5 class="text-center-h font-weight-bold textLoading" style="display: none;">confirme la compra</h5>
+      <h5 id="textError" class="text-center-h mt-5 font-weight-bold"
+        style="display: none; margin-left: 5px;margin-right: 5px;">Error al escanear el código por favor inténtalo de
+        nuevo.</h5>
+      <h5 id="textTime" class="text-center-h mt-5 font-weight-bold" style="display: none;">Tiempo agotado.</h5>
+      <div id="pn-1" class="d-flex flex-column align-items-center justify-content-center">
+        <div class="pn-canvas animate__animated animate__bounce" id="pn-qr" style="display: none;">
+          <div id="canvas">
 
-            </div>
           </div>
-          <div class="pn-canvas-2 animate__animated" id="pn-cargando"> 
-            <img src="img/loading.svg" alt="cargando Informacion">
-          </div>
-          <div class="animate__animated" id="pn-exito" style="display: none;">
-            <h5 class="text-center-h mt-10 font-weight-bold orange-text">¡Transacción exitosa!</h5>
-            <img src="img/correcto3.png" class="img-fluid" alt="Imagen Responsive">
-            <h5 class="text-center-h  mt-10 font-weight-bold">¡Gracias por utilizar akisí!</h5>
-          </div>
-          <div class="pn-canvas-2 animate__animated" id="pn-error" onclick="window.location.reload()"  style="display: none;"> 
-              <center><img src="img/reload.svg" class="img-fluid" alt="Imagen Responsive"></center>
-            <p style="text-align: center;margin-top: 15px;">Toca la pantalla para recargar</p>
-          </div>
-          <div id="pn-descripcion">
-            <div class="d-flex flex-column align-items-center justify-content-center">
-              <h4 class="text-center-h font-weight-bold mt-5" id="monto" style="display: none;"></h4>
-            </div>
-          </div>
-          <p class="text-center-h" id="time" style="color: black !important;margin-top: 15px;"></p>
         </div>
+        <div class="pn-canvas-2 animate__animated" id="pn-cargando">
+          <img src="img/loading.svg" alt="cargando Informacion">
+        </div>
+        <div class="animate__animated" id="pn-exito" style="display: none;">
+          <h5 class="text-center-h mt-10 font-weight-bold orange-text">¡Transacción exitosa!</h5>
+          <img src="img/correcto3.png" class="img-fluid" alt="Imagen Responsive">
+          <h5 class="text-center-h  mt-10 font-weight-bold">¡Gracias por utilizar akisí!</h5>
+        </div>
+        <div class="pn-canvas-2 animate__animated" id="pn-error" onclick="window.location.reload()"
+          style="display: none;">
+          <center><img src="img/reload.svg" class="img-fluid" alt="Imagen Responsive"></center>
+          <p style="text-align: center;margin-top: 15px;">Toca la pantalla para recargar</p>
+        </div>
+        <div id="pn-descripcion">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <h4 class="text-center-h font-weight-bold mt-5" id="monto" style="display: none;"></h4>
+          </div>
+        </div>
+        <p class="text-center-h" id="time" style="color: black !important;margin-top: 15px;"></p>
       </div>
     </div>
     <span class="fixed-botton" id="btnFixed" onclick="window.location.reload()">
@@ -58,7 +60,7 @@
       <img src="img/people.png" class="img-fluid" alt="Imagen Responsive">
     </div>
   </div>
- 
+
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
