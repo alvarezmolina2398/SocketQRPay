@@ -76,8 +76,15 @@ io.on("connection", (socket) => {
 
       // Configuración de timeout si la acción es 1
       if (data.accion === 1) {
+
         const milliseconds = 10 * 60 * 1000; // 10 minutos
         setTimeout(() => {
+
+
+
+          const env =  "";
+
+
           const qrUrl = `https://devgefectivov2.site/v1/enviar-mensaje/${data.sesion}/5/${data.sesionQR}`;
           fetch(qrUrl, { method: "GET" })
             .then((res) => console.log("QR Timeout enviado:", res.status))

@@ -97,13 +97,16 @@ $(function () {
 
 const crearQr = (comercio, sesion, monto, sesionQR) => {
     const qrCode = new QRCodeStyling({
-        width: 250,
-        height: 250,
+        width: 300,
+        height: 300,
         type: "png",
         data: `${comercio}/${sesion}/${monto}/${sesionQR}`,
         dotsOptions: {
-            type: "none",
-            color: "#000",
+            type: "extra-rounded",
+            color: "#8B179A",
+        },
+        bagroundOptions : {
+            color: '#ffffff'
         },
         imageOptions: {
             crossOrigin: "anonymous",
