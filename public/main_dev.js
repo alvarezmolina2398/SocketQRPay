@@ -1,5 +1,5 @@
-//const socket = io("https://devgefectivov2.site");
-const socket = io("localhost:8080");
+const socket = io("https://devgefectivov2.site");
+//const socket = io("localhost:8080");
 
 const generarCadenaAleatoria = (cantidad) => {
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
