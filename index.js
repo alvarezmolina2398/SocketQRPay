@@ -50,28 +50,28 @@ io.on("connection", (socket) => {
       console.log("Procesando nuevo mensaje:", data);
       const env = data.env == "dev" ? 'GEfectivoAdminDes' : 'GEfectivoAdmin'
       // Llamada al API externo
-      const url = "https://appsip.genesisempresarial.com/" + env + "/api/LogBotonPago/InsertLogBotonPago";
-      const payload = {
-        sesion: data.sesion ?? "",
-        comercio: data.comercio ?? "",
-        monto: data.monto ?? 0,
-        usuario_id: data.usuario ?? "SIN USUARIO",
-        accion: data.accion.toString() ?? "0",
-        referenciaByte: data.TransaccionByte ?? "N/A",
-        referenciaPronet: data.trxPronet ?? "N/A",
-      };
+      // const url = "https://appsip.genesisempresarial.com/" + env + "/api/LogBotonPago/InsertLogBotonPago";
+      // const payload = {
+      //   sesion: data.sesion ?? "",
+      //   comercio: data.comercio ?? "",
+      //   monto: data.monto ?? 0,
+      //   usuario_id: data.usuario ?? "SIN USUARIO",
+      //   accion: data.accion.toString() ?? "0",
+      //   referenciaByte: data.TransaccionByte ?? "N/A",
+      //   referenciaPronet: data.trxPronet ?? "N/A",
+      // };
 
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Cookie": "cookiesession1=678A3E10E82C9FD71F9E281AAD4522E9",
-        },
-        body: JSON.stringify(payload),
-      };
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "Cookie": "cookiesession1=678A3E10E82C9FD71F9E281AAD4522E9",
+      //   },
+      //   body: JSON.stringify(payload),
+      // };
 
-      const response = await fetch(url, requestOptions);
-      const result = await response.text();
+      // const response = await fetch(url, requestOptions);
+      // const result = await response.text();
       console.log("Respuesta del API:", result);
 
       // Configuración de timeout si la acción es 1
