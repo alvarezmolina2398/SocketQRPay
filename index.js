@@ -72,31 +72,31 @@ io.on("connection", (socket) => {
 
       const response = await fetch(url, requestOptions);
       const result = await response.text();
-      console.log("Respuesta del API:", result);
+      console.log("Respuesta del API:", url, result);
 
       // Configuración de timeout si la acción es 1
       if (data.accion === 1) {
 
         const milliseconds = 10 * 60 * 1000; // 10 minutos
         setTimeout(() => {
-      
+
           const myHeaders = new Headers();
           myHeaders.append("Content-Type", "application/json");
-          
+
           const dataCC = JSON.stringify({
             "sesion": data.sesion,
             "accion": 5,
             "sesionQR": data.sesionQR,
             "env": data.env
           });
-          
+
           const requestOptionsCC = {
             method: "POST",
             headers: myHeaders,
             body: dataCC,
             redirect: "follow"
           };
-          
+
           fetch("https://devgefectivov2.site/QrPosApi/confirmar-compra", requestOptionsCC)
             .then((response) => response.text())
             .then((result) => console.log(result))
