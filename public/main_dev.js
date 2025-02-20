@@ -40,7 +40,7 @@ $(function () {
 
         if (diferenciaTiempo <= 0) {
             clearInterval(intervalo);
-            socket.emit("new-message", { sesion, comercio, monto, accion: 5 });
+            socket.emit("new-message", { sesion, comercio, monto, accion: 5 , usuario, sesionQR, env: "dev"});
         } else {
             const minutosRestantes = Math.floor((diferenciaTiempo / 1000 / 60) % 60);
             const segundosRestantes = Math.floor((diferenciaTiempo / 1000) % 60);
