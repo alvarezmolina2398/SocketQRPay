@@ -50,28 +50,28 @@ io.on("connection", (socket) => {
       console.log("Procesando nuevo mensaje:", data);
       const env = data.env == "dev" ? 'GEfectivoAdminDes' : 'GEfectivoAdmin'
       // Llamada al API externo
-      // const url = "https://appsip.genesisempresarial.com/" + env + "/api/LogBotonPago/InsertLogBotonPago";
-      // const payload = {
-      //   sesion: data.sesion ?? "",
-      //   comercio: data.comercio ?? "",
-      //   monto: data.monto ?? 0,
-      //   usuario_id: data.usuario ?? "SIN USUARIO",
-      //   accion: data.accion.toString() ?? "0",
-      //   referenciaByte: data.TransaccionByte ?? "N/A",
-      //   referenciaPronet: data.trxPronet ?? "N/A",
-      // };
+      const url = "https://appsip.genesisempresarial.com/" + env + "/api/LogBotonPago/InsertLogBotonPago";
+      const payload = {
+        sesion: data.sesion ?? "",
+        comercio: data.comercio ?? "",
+        monto: data.monto ?? 0,
+        usuario_id: data.usuario ?? "SIN USUARIO",
+        accion: data.accion.toString() ?? "0",
+        referenciaByte: data.TransaccionByte ?? "N/A",
+        referenciaPronet: data.trxPronet ?? "N/A",
+      };
 
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "Cookie": "cookiesession1=678A3E10E82C9FD71F9E281AAD4522E9",
-      //   },
-      //   body: JSON.stringify(payload),
-      // };
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Cookie": "cookiesession1=678A3E10E82C9FD71F9E281AAD4522E9",
+        },
+        body: JSON.stringify(payload),
+      };
 
-      // const response = await fetch(url, requestOptions);
-      // const result = await response.text();
+      const response = await fetch(url, requestOptions);
+      const result = await response.text();
       console.log("Respuesta del API:", result);
 
       // Configuración de timeout si la acción es 1
@@ -79,16 +79,34 @@ io.on("connection", (socket) => {
 
         const milliseconds = 10 * 60 * 1000; // 10 minutos
         setTimeout(() => {
+      
+          const myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+          
+          const dataCC = JSON.stringify({
+            "sesion": data.sesion,
+            "accion": 5,
+            "sesionQR": data.sesionQR,
+            "env": data.env
+          });
+          
+          const requestOptionsCC = {
+            method: "POST",
+            headers: myHeaders,
+            body: dataCC,
+            redirect: "follow"
+          };
+          
+          fetch("https://devgefectivov2.site/QrPosApi/confirmar-compra", requestOptionsCC)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
 
+          // const qrUrl = `https://devgefectivov2.site/v1/enviar-mensaje/${data.sesion}/5/${data.sesionQR}`;
+          // fetch(qrUrl, { method: "GET" })
+          //   .then((res) => console.log("QR Timeout enviado:", res.status))
+          //   .catch((err) => console.error("Error enviando QR Timeout:", err));
 
-
-          const env =  "";
-
-
-          const qrUrl = `https://devgefectivov2.site/v1/enviar-mensaje/${data.sesion}/5/${data.sesionQR}`;
-          fetch(qrUrl, { method: "GET" })
-            .then((res) => console.log("QR Timeout enviado:", res.status))
-            .catch((err) => console.error("Error enviando QR Timeout:", err));
         }, milliseconds);
       }
 
