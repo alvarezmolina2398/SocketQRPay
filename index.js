@@ -101,7 +101,7 @@ io.on("connection", (socket) => {
             .then((response) => response.text())
             .then((result) => console.log(result))
             .catch((error) => console.error(error));
-
+          console.log("https://devgefectivov2.site/QrPosApi/confirmar-compra",requestOptionsCC)
           // const qrUrl = `https://devgefectivov2.site/v1/enviar-mensaje/${data.sesion}/5/${data.sesionQR}`;
           // fetch(qrUrl, { method: "GET" })
           //   .then((res) => console.log("QR Timeout enviado:", res.status))
