@@ -67,7 +67,7 @@ $(function () {
 
 
     socket.on("messages", function (data) {
-        console.log(data);
+        // console.log(data);
         var message = data[data.length - 1];
         if (message.accion != '6') {
             $('#pn-qr').hide();
