@@ -59,6 +59,7 @@ io.on("connection", (socket) => {
         accion: data.accion.toString() ?? "0",
         referenciaByte: data.TransaccionByte ?? "N/A",
         referenciaPronet: data.trxPronet ?? "N/A",
+        
       };
 
       const requestOptions = {
