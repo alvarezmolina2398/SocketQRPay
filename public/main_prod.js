@@ -26,6 +26,7 @@ $(function () {
     const usuario = urlParams.get('usuario');
     const sesion = urlParams.get('sesion');
     montoTxt.text('Q' + parseFloat(monto).toFixed(2));
+    const bill_reference = urlParams.get('bill_reference') || null;
 
     const sesionQR = generarCadenaAleatoria(6);
     sesionTxt.val(sesion);
@@ -40,7 +41,7 @@ $(function () {
 
         if (diferenciaTiempo <= 0) {
             clearInterval(intervalo);
-            socket.emit("new-message", { sesion, comercio, monto, accion: 5, usuario, sesionQR, env: "prod" });
+            socket.emit("new-message", { sesion, comercio, monto, accion: 5, usuario, sesionQR, env: "prod", bill_reference });
         } else {
             const minutosRestantes = Math.floor((diferenciaTiempo / 1000 / 60) % 60);
             const segundosRestantes = Math.floor((diferenciaTiempo / 1000) % 60);
@@ -49,7 +50,7 @@ $(function () {
     }, 1000);
 
     socket.emit("join-room", sesion);
-    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario, sesionQR, env: "prod"});
+    socket.emit("new-message", { sesion, comercio, monto, accion: 1, usuario, sesionQR, env: "prod", bill_reference});
 
     socket.on("messages", function (data) {
         const message = data[data.length - 1];
